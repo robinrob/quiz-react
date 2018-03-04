@@ -1,0 +1,34 @@
+@import "colors"
+
+$base-font-family: Helvetica, Arial, sans-serif
+$base-font-size:   16px
+$small-font-size:  $base-font-size * 0.875
+$base-line-height: 1.5
+
+/*****************************************************************/
+/* Colors (themed) */
+/*****************************************************************/
+$a-color: $theme-3
+$a-visited: $a-color
+$a-hover-color: $a-color
+
+$nav-color: darken($theme-1, 10%)
+$nav-hover-color: $theme-2
+
+$text-color: $theme-5
+$background-color: $theme-5
+$top-buffer: 20px
+
+$base-font-family: Helvetica, Arial, sans-serif
+$base-font-size:   16px
+$small-font-size:  $base-font-size * 0.875
+$base-line-height: 1.5
+
+$spacing-unit:     40px
+
+@mixin media-query($device)
+    @media screen and (max-width: $device)
+        @content
+
+
+@import "base", "Index"

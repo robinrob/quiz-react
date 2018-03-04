@@ -1,0 +1,85 @@
+/*****************************************************************/
+/* Colors (themed) */
+/*****************************************************************/
+/**
+ * Basic styling
+ */
+html, body, #app {
+  height: 100%; }
+
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 300;
+  color: #303030;
+  -webkit-text-size-adjust: 100%; }
+
+/**
+ * Set `margin-bottom` to maintain vertical rhythm
+ */
+h1, h2, h3, h4, h5, h6,
+p, blockquote, pre,
+ul, ol, dl, figure {
+  margin-bottom: 20px; }
+
+/**
+ * Images
+ */
+img {
+  max-width: 100%;
+  vertical-align: middle; }
+
+/**
+ * Figures
+ */
+figure > img {
+  display: block; }
+
+figcaption {
+  font-size: 14px; }
+
+/**
+ * Lists
+ */
+ul, ol {
+  margin-left: 40px; }
+
+li > ul,
+li > ol {
+  margin-bottom: 0; }
+
+/**
+ * Headings
+ */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 300; }
+
+strong {
+  font-weight: 600; }
+
+/**
+ * Links
+ */
+a {
+  color: #969696;
+  text-decoration: none; }
+
+/**
+ * Clearfix
+ */
+.cf:before, .cf:after {
+  content: " ";
+  display: table; }
+
+.cf:after {
+  clear: both; }
+
+.cf {
+  *zoom: 1; }
+
+/* for IE6 and IE7 */
+.center {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto; }

@@ -1,0 +1,94 @@
+/**
+ * Basic styling
+ */
+
+html, body, #app
+  height: 100%
+
+body
+  font-family: $base-font-family
+  font-size: $base-font-size
+  line-height: $base-line-height
+  font-weight: 300
+  color: $text-color
+  -webkit-text-size-adjust: 100%
+
+/**
+ * Set `margin-bottom` to maintain vertical rhythm
+ */
+h1, h2, h3, h4, h5, h6,
+p, blockquote, pre,
+ul, ol, dl, figure,
+%vertical-rhythm
+  margin-bottom: $spacing-unit / 2
+
+/**
+ * Images
+ */
+img
+  max-width: 100%
+  vertical-align: middle
+
+/**
+ * Figures
+ */
+figure > img
+  display: block
+
+figcaption
+  font-size: $small-font-size
+
+/**
+ * Lists
+ */
+ul, ol
+  margin-left: $spacing-unit
+
+li
+  > ul,
+  > ol
+    margin-bottom: 0
+
+/**
+ * Headings
+ */
+h1, h2, h3, h4, h5, h6
+  font-weight: 300
+
+strong
+  font-weight: 600
+
+/**
+ * Links
+ */
+a
+  color: $a-color
+  text-decoration: none
+
+/**
+ * Clearfix
+ */
+%clearfix
+
+  &:after
+    content: ""
+    display: table
+    clear: both
+
+.cf:before, .cf:after
+  content: " "
+  display: table
+
+.cf:after
+  clear: both
+
+.cf
+  *zoom: 1
+/* for IE6 and IE7 */
+
+
+.center
+  text-align: center
+  margin-left: auto
+  margin-right: auto
+
