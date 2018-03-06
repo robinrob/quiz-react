@@ -11,14 +11,8 @@ export default class Quiz extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {name: ''};
+        console.log('this.props: ' + JSON.stringify(this.props, null, '\t'))
     };
-
-    updateName(name) {
-       this.setState({
-           name: name
-       })
-    }
 
     render() {
         return (
@@ -36,7 +30,7 @@ export default class Quiz extends React.Component {
                         <div>
                             <label>What is your name?</label>
                             <input type="text" className="form-control" placeholder="Enter Your Name"
-                                   defaultValue={this.state.name} onChange={(e) => this.updateName(e.target.value)}
+                                   defaultValue={this.props.name} onChange={(e) => this.props.onNext(e.target.value)}
                                    />
                         </div>
                     )}
@@ -46,10 +40,10 @@ export default class Quiz extends React.Component {
                     {form_row(
                         <div className="nextButtonRow">
                             <label></label>
-                            <Link to={"/questions/"+this.props.question_ids[0]}
+                            <Link to={"/questions/25"}
                                   className="nextBtn btn btn-md btn-primary"
-                                  onClick={() => this.props.setName(this.state.name)}
-                                  disabled={!this.state.name}
+                                  onClick={() => this.props.onNext(this.props.name)}
+                                  disabled={!this.props.name}
                                   >
                                 Next
                             </Link>
