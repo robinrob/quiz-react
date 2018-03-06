@@ -6,11 +6,13 @@ const jshint = require('gulp-jshint');
 const minifyCSS = require('gulp-minify-css')
 const minifyHTML = require('gulp-minify-html')
 const prefix = require('gulp-autoprefixer')
+const proxy = require('proxy-middleware')
 const runSequence = require('run-sequence')
 const sass = require('gulp-sass')
 const stylish = require('jshint-stylish');
 const watch = require('gulp-watch')
 const webpack = require('gulp-webpack')
+const url = require('url');
 
 const buildDir = 'dist'
 const config = {
@@ -38,8 +40,8 @@ const config = {
             dest: buildDir + '/css/'
         },
         js: {
-            main: 'src/Index.js',
-            src: 'src/**/*.js',
+            main: 'src/index.jsx',
+            src: 'src/**/*.jsx',
             dest: buildDir + '/bundle.js'
         }
     }
@@ -58,13 +60,19 @@ gulp.task('reload', function () {
     browserSync.reload()
 })
 
-gulp.task('serve', function () {
+gulp.task('browser-sync', function () {
+    var proxyOptions = url.parse('http://127.0.0.1:3001')
+    proxyOptions.route = '/api';
+
     browserSync({
+        open: true,
+        port: 3000,
         server: {
-            baseDir: './'
+            baseDir: ".",
+            middleware: [proxy(proxyOptions)]
         },
         browser: 'Google\ Chrome'
-    })
+    });
 })
 
 gulp.task('clean', function () {
@@ -124,6 +132,7 @@ gulp.task('webpack', function() {
 gulp.task('js-lint', function() {
   return gulp.src(config.paths.js.src)
     .pipe(jshint({
+        esversion: 6,
         linter: require('jshint-jsx').JSXHINT
     }))
     .pipe(jshint.reporter(stylish))
@@ -146,5 +155,5 @@ gulp.task('dev-watch', function () {
 });
 
 gulp.task('default', function (done) {
-    runSequence('dev-build', 'dev-watch', 'serve', done)
+    runSequence('dev-build', 'dev-watch', 'browser-sync', done)
 });

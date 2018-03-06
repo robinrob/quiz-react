@@ -83,3 +83,21 @@ a {
   text-align: center;
   margin-left: auto;
   margin-right: auto; }
+
+div.spacer-1 {
+  display: block;
+  height: -webkit-calc(2 * 40px);
+  height: calc(2 * 40px); }
+
+div.spacer-2 {
+  display: block;
+  height: -webkit-calc(4 * 40px);
+  height: calc(4 * 40px); }
+
+.top-buffer {
+  padding-top: 40px; }
+
+.quiz .nextButtonRow {
+  text-align: left; }
+  .quiz .nextButtonRow .nextBtn {
+    width: 200px; }

@@ -1,6 +1,7 @@
 node_modules
 dist
-.idea
+.vscode
 bower_components
 npm-debug.log
 .node-version
+.yarn-error.log
