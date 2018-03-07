@@ -7,12 +7,6 @@ import { Link } from 'react-router-dom';
 export default class Question extends React.Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            question: {title: ''},
-            answers: [],
-            answer: null
-        }
     }
 
     updateAnswer(answer) {
@@ -31,30 +25,6 @@ export default class Question extends React.Component {
         )
     };
 
-    nextURL() {
-        if (this.state.next_id) {
-            return "/questions/"+this.state.next_id
-        } else {
-            return "/results"
-        }
-    }
-
-    async componentWillMount() {
-        try {
-            let response = await axios.get('/api/questions/'+this.props.match.params.id+'.json')
-
-            this.setState({
-                question: response.data.question,
-                answers: response.data.answers,
-                next_id: response.data.next_id
-            })
-
-        } catch(error) {
-            console.log('error: ' + JSON.stringify(error, null, '\t'))
-        }
-
-    };
-
     addAnswer() {
         this.props.addAnswer({
             question_id: this.state.question.id,
@@ -63,20 +33,19 @@ export default class Question extends React.Component {
     }
 
     render() {
-        let url = this.nextURL()
-        console.log('url: ' + url)
+        let question = this.props.nextQuestion(this.props.questions)
         return (
             <div className="question top-buffer">
                 {form_row(
-                    <h2>{this.state.question.title}</h2>
+                    <h2>{question.title}</h2>
                 )}
                 <div className="spacer-1"></div>
                 <form>
-                    {this.state.answers.map((answer) => this.answerRow(answer))}
+                    {question.answers.map((answer) => this.answerRow(answer))}
                     {form_row(
                         <div className="nextButtonRow">
                             <label></label>
-                            <Link to={this.nextURL()} className="nextBtn btn btn-md btn-primary" onClick={() => this.addAnswer()} disabled={!this.state.answer}>Next</Link>
+                            <Link to={this.props.nextURL } className="nextBtn btn btn-md btn-primary" onClick={() => this.props.addAnswer(this.state.answer)} disabled={!this.state.answer}>Next</Link>
                         </div>
                     )}
                 </form>

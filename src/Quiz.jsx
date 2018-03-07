@@ -6,12 +6,24 @@ import 'react-bootstrap';
 
 import _ from 'lodash';
 
+import axios from 'axios';
+
 
 export default class Quiz extends React.Component {
     constructor(props) {
         super(props);
 
         console.log('this.props: ' + JSON.stringify(this.props, null, '\t'))
+    };
+
+    async componentWillMount() {
+        try {
+            let response = await axios.get('/api/questions')
+
+            this.props.loadQuestions(response.data)
+        } catch(error) {
+            console.log(error)
+        }
     };
 
     render() {
@@ -30,7 +42,7 @@ export default class Quiz extends React.Component {
                         <div>
                             <label>What is your name?</label>
                             <input type="text" className="form-control" placeholder="Enter Your Name"
-                                   defaultValue={this.props.name} onChange={(e) => this.props.onNext(e.target.value)}
+                                   defaultValue={this.props.name} onChange={(e) => this.props.updateName(e.target.value)}
                                    />
                         </div>
                     )}
@@ -40,10 +52,10 @@ export default class Quiz extends React.Component {
                     {form_row(
                         <div className="nextButtonRow">
                             <label></label>
-                            <Link to={"/questions/25"}
+                            <Link to={this.props.nextURL(this.props.questions)}
                                   className="nextBtn btn btn-md btn-primary"
-                                  onClick={() => this.props.onNext(this.props.name)}
                                   disabled={!this.props.name}
+                                  onClick={() => this.props.onNext(this.props.questions)}
                                   >
                                 Next
                             </Link>
