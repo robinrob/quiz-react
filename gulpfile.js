@@ -2,14 +2,12 @@ const browserSync = require('browser-sync')
 const clean = require('gulp-clean');
 const concat = require('gulp-concat')
 const gulp = require('gulp')
-const jshint = require('gulp-jshint');
+const eslint = require('gulp-eslint');
 const minifyCSS = require('gulp-minify-css')
 const minifyHTML = require('gulp-minify-html')
 const prefix = require('gulp-autoprefixer')
 const proxy = require('proxy-middleware')
-const runSequence = require('run-sequence')
 const sass = require('gulp-sass')
-const stylish = require('jshint-stylish');
 const watch = require('gulp-watch')
 const webpack = require('gulp-webpack')
 const url = require('url');
@@ -56,8 +54,9 @@ function onError(err) {
     console.log('err: ' + err)
 }
 
-gulp.task('reload', function () {
+gulp.task('reload', function (done) {
     browserSync.reload()
+    done()
 })
 
 gulp.task('browser-sync', function () {
@@ -110,13 +109,9 @@ gulp.task('css-minify', function () {
         .pipe(gulp.dest(config.paths.css.dest))
 });
 
-gulp.task('css-dev', function (done) {
-    runSequence('css-concat', done)
-});
+gulp.task('css-dev', gulp.series('css-concat'));
 
-gulp.task('css', function (done) {
-    runSequence('css-concat', 'css-minify', done)
-});
+gulp.task('css', gulp.series('css-concat', 'css-minify'));
 
 gulp.task('fonts', function (done) {
     return gulp.src(config.paths.fonts.src)
@@ -130,30 +125,30 @@ gulp.task('webpack', function() {
 });
 
 gulp.task('js-lint', function() {
-  return gulp.src(config.paths.js.src)
-    .pipe(jshint({
-        esversion: 6,
-        linter: require('jshint-jsx').JSXHINT
-    }))
-    .pipe(jshint.reporter(stylish))
+    // ESLint ignores files with "node_modules" paths.
+    // So, it's best to have gulp ignore the directory as well.
+    // Also, Be sure to return the stream from the task;
+    // Otherwise, the task may end before the stream has finished.
+    return gulp.src(['**/*.js', '**/*.jsx', '!node_modules/**', '!dist/**'])
+        // eslint() attaches the lint output to the "eslint" property
+        // of the file object so it can be used by other modules.
+        .pipe(eslint())
+        // eslint.format() outputs the lint results to the console.
+        // Alternatively use eslint.formatEach() (see Docs).
+        .pipe(eslint.format())
+        // To have the process exit with an error code (1) on
+        // lint error, return the stream and pipe to failAfterError last.
+        .pipe(eslint.failAfterError())
 });
 
-gulp.task('js', function (done) {
-    runSequence('webpack', 'js-lint', done)
-});
+gulp.task('js', gulp.series('webpack', 'js-lint'));
 
-gulp.task('build', function (done) {
-    runSequence('clean', 'html', 'sass', ['css', 'js'], done)
-});
+gulp.task('build', gulp.series('clean', 'html', 'sass', gulp.parallel('css', 'js')));
 
-gulp.task('dev-build', function (done) {
-    runSequence('clean', 'sass', ['css-dev', 'js'], 'reload', done)
-});
+gulp.task('dev-build', gulp.series('clean', 'sass', gulp.parallel('css-dev', 'js'), 'reload'));
 
 gulp.task('dev-watch', function () {
-    gulp.watch(config.paths.watch, ['dev-build'])
+    return watch('src/*.jsx', gulp.series('dev-build'))
 });
 
-gulp.task('default', function (done) {
-    runSequence('dev-build', 'dev-watch', 'browser-sync', done)
-});
+gulp.task('default', gulp.series('dev-build', gulp.parallel('dev-watch', 'browser-sync')));
