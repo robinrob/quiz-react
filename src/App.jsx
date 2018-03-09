@@ -28,7 +28,7 @@ export default class App extends React.Component {
         <HashRouter>
           <div className="App container">
             <div className="row">
-              <div className="col-md-7 col-sm-8 col-xs-9">
+              <div className="col-md-8 col-sm-9 col-xs-10">
                 <Route exact path="/quiz" component={ConnectedQuiz} />
                 <Route exact path="/questions/:id" component={ConnectedQuestion} />
                 <Route exact path="/results" component={ConnectedResults} />
