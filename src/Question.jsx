@@ -4,9 +4,16 @@ import axios from 'axios';
 
 import { Link } from 'react-router-dom';
 
+import { ConnectedNextButton } from './App'
+
+
 export default class Question extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            answer: null
+        }
     }
 
     updateAnswer(answer) {
@@ -16,51 +23,46 @@ export default class Question extends React.Component {
     };
 
     answerRow(answer) {
-        return form_row(
-            <div className="form-inline">
-                <input type="radio" className="answer-radio" name="answer" value={answer.id} onChange={(e) => this.updateAnswer(answer)} />
-                <label>{answer.text}</label>
-            </div>,
-            answer.id
+        return (
+            <div key={answer.id} className="answer-row">
+                {row(
+                    <div className="form-inline form-group">
+                        <input type="radio" className="answer-radio" name="answer" value={answer.id} onChange={(e) => this.updateAnswer(answer)} />
+                        <label>{answer.text}</label>
+                    </div>,
+                    answer.id
+                )}
+            </div>
         )
     };
 
-    addAnswer() {
-        this.props.addAnswer({
-            question_id: this.state.question.id,
-            answer_id: this.state.answer.id
-        })
-    }
-
     render() {
-        let question = this.props.nextQuestion(this.props.questions)
         return (
             <div className="question top-buffer">
-                {form_row(
-                    <h2>{question.title}</h2>
-                )}
-                <div className="spacer-1"></div>
+                {row(<h2>{this.props.currentQuestion.title}</h2>)}
                 <form>
-                    {question.answers.map((answer) => this.answerRow(answer))}
-                    {form_row(
-                        <div className="nextButtonRow">
-                            <label></label>
-                            <Link to={this.props.nextURL } className="nextBtn btn btn-md btn-primary" onClick={() => this.props.addAnswer(this.state.answer)} disabled={!this.state.answer}>Next</Link>
-                        </div>
-                    )}
+                    {this.props.currentQuestion.answers.map((answer) => this.answerRow(answer))}
                 </form>
+                    {row(
+                        <ConnectedNextButton {...this.props}
+                            toURL={() => this.props.nextURL(this.props.questions, this.props.currentQuestion)}
+                            isDisabled={() => !this.state.answer }
+                            onNext={() => this.props.answerQuestion(this.props.currentQuestion, this.state.answer)}
+                            />
+                    )}
             </div>
         );
     }
 }
 
-function form_row(html, key) {
+function row(html) {
     return (
-        <div className="form-group row" key={key}>
-            <div className="col-md-12">
+        <div className="row">
+            <div className="col-xs-12">
                 {html}
             </div>
         </div>
     )
 };
+
 

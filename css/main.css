@@ -1,6 +1,3 @@
-/*****************************************************************/
-/* Colors (themed) */
-/*****************************************************************/
 /**
  * Basic styling
  */
@@ -9,7 +6,7 @@ html, body, #app {
 
 body {
   font-family: Helvetica, Arial, sans-serif;
-  font-size: 16px;
+  font-size: 16px !important;
   line-height: 1.5;
   font-weight: 300;
   color: #303030;
@@ -21,7 +18,7 @@ body {
 h1, h2, h3, h4, h5, h6,
 p, blockquote, pre,
 ul, ol, dl, figure {
-  margin-bottom: 20px; }
+  margin-bottom: 10px; }
 
 /**
  * Images
@@ -43,7 +40,7 @@ figcaption {
  * Lists
  */
 ul, ol {
-  margin-left: 40px; }
+  margin-left: 20px; }
 
 li > ul,
 li > ol {
@@ -86,18 +83,40 @@ a {
 
 div.spacer-1 {
   display: block;
-  height: -webkit-calc(2 * 40px);
-  height: calc(2 * 40px); }
+  height: -webkit-calc(2 * 20px);
+  height: calc(2 * 20px); }
 
 div.spacer-2 {
   display: block;
-  height: -webkit-calc(4 * 40px);
-  height: calc(4 * 40px); }
+  height: -webkit-calc(4 * 20px);
+  height: calc(4 * 20px); }
 
 .top-buffer {
   padding-top: 40px; }
 
-.quiz .nextButtonRow {
-  text-align: left; }
-  .quiz .nextButtonRow .nextBtn {
-    width: 200px; }
+.quiz h1 {
+  text-align: center;
+  margin-bottom: 80px; }
+
+.quiz .nextBtn {
+  margin-top: 20px; }
+
+.question h2 {
+  margin-bottom: 40px; }
+
+.question .answer-row {
+  margin-bottom: 20px; }
+  .question .answer-row .answer-radio {
+    margin-right: 2em; }
+
+.question .nextBtn {
+  margin-top: 20px; }
+
+.nextBtn {
+  width: 200px; }
+
+.results h2 {
+  margin-bottom: 80px; }
+
+.results p.result {
+  margin-bottom: 60px; }

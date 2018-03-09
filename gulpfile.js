@@ -20,13 +20,13 @@ const config = {
         img: ['img/**/*'],
         markdown: ['_posts/*.md'],
         html: {
-            src: ['index.html'],
+            src: 'index.html',
             build: [buildDir + '/**/*.html'],
             dest: './'
         },
         sass: {
             main: 'sass/main.sass',
-            src: 'sass/*.sass',
+            src: 'sass/*',
             dest: 'css/'
         },
         css: {
@@ -148,7 +148,7 @@ gulp.task('build', gulp.series('clean', 'html', 'sass', gulp.parallel('css', 'js
 gulp.task('dev-build', gulp.series('clean', 'sass', gulp.parallel('css-dev', 'js'), 'reload'));
 
 gulp.task('dev-watch', function () {
-    return watch('src/*.jsx', gulp.series('dev-build'))
+    return watch(config.paths.watch, gulp.series('dev-build'))
 });
 
 gulp.task('default', gulp.series('dev-build', gulp.parallel('dev-watch', 'browser-sync')));

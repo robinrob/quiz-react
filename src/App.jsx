@@ -9,21 +9,13 @@ import axios from 'axios';
 
 import Quiz from './Quiz';
 import Question from './Question'
+import NextButton from './NextButton'
 import Results from './Results'
 
 
 export default class App extends React.Component {
   constructor(props) {
     super(props)
-}
-
-  addAnswer(answer) {
-    return {
-      type: SET_ANSWER
-    }
-    this.setState({
-      answers: _.concat(this.state.answers, [answer])
-    })
   }
 
   getAnswers() {
@@ -39,7 +31,7 @@ export default class App extends React.Component {
               <div className="col-md-7 col-sm-8 col-xs-9">
                 <Route exact path="/quiz" component={ConnectedQuiz} />
                 <Route exact path="/questions/:id" component={ConnectedQuestion} />
-                <Route exact path="/results" component={(props) => (<Results {...props} getAnswers={() => this.getAnswers} />)} />
+                <Route exact path="/results" component={ConnectedResults} />
               </div>
             </div>
           </div>
@@ -53,13 +45,14 @@ export default class App extends React.Component {
 export const LOAD_QUESTIONS = 'LOAD_QUESTIONS'
 export const ON_NEXT = 'ON_NEXT'
 export const SET_NAME = 'SET_NAME'
-export const ADD_ANSWER = 'ADD_ANSWER'
+export const ANSWER_QUESTION = 'ANSWER_QUESTION'
+export const RESET_QUIZ = 'RESET_QUIZ'
 
 
 const initialState = {
   name: '',
   questions: [],
-  answers: []
+  answered_questions: []
 }
 
 
@@ -73,30 +66,24 @@ function quizApp(state = initialState, action) {
       return Object.assign({}, state, {
         name: action.name
       })
-    case ON_NEXT:
+    case ANSWER_QUESTION:
       return Object.assign({}, state, {
-        questions: state.questions.slice()
+        questions: state.questions.slice(1),
+        answered_questions: _.concat(
+          state.answered_questions,
+          [Object.assign(action.question, {answer: action.answer})]
+        )
       })
-    case ADD_ANSWER:
-      return Object.assign({}, state, {
-        answers: _.concat(state.answeas + [action.answer])
-      })
-  
+    case RESET_QUIZ:
+      return Object.assign(initialState, {name: state.name})
     default:
       return state
   }
 }
 
-
 let store = createStore(quizApp)
 
-
-// Every time the state changes, log it
-// Note that subscribe() returns a function for unregistering the listener
-const unsubscribe = store.subscribe(() =>
-  console.log(store.getState())
-)
-
+const unsubscribe = store.subscribe(() => console.log(store.getState()))
 
 function loadQuestions(questions) {
   return {
@@ -105,25 +92,17 @@ function loadQuestions(questions) {
   }
 }
 
-function nextURL(questions) {
-  let URL
-
-  if (questions.length > 0) {
-    URL =  "questions/"+questions[0].id
-  } else {
-    URL = "results"
+function nextURL(questions, currentQuestion) {
+  let remainingQuestions = questions
+  if (!_.isNil(currentQuestion)) {
+    remainingQuestions = _.filter(questions, (q) => q.id != currentQuestion.id)
   }
+  let nextQuestion = _.first(remainingQuestions)
 
-  return URL
-}
-
-function nextQuestion(questions) {
-  return questions[0]
-}
-
-function onNext(questions) {
-  return {
-    type: ON_NEXT
+  if (_.isObject(nextQuestion)) {
+    return "/questions/"+nextQuestion.id
+  } else {
+    return "/results"
   }
 }
 
@@ -134,17 +113,20 @@ function updateName(name) {
   }
 }
 
-function addAnswer(answer) {
+function answerQuestion(question, answer) {
   return {
-    type: ADD_ANSWER,
-    answer
+    type: ANSWER_QUESTION,
+    question: question,
+    answer: answer
   }
 }
 
 const mapStateToProps = state => {
   return {
-    questions: state.questions,
     name: state.name,
+    currentQuestion: _.first(state.questions),
+    questions: state.questions,
+    answered_questions: state.answered_questions
   }
 }
 
@@ -152,13 +134,14 @@ const mapDispatchToProps = dispatch => {
   return {
     loadQuestions: questions => dispatch(loadQuestions(questions)),
     updateName: name => dispatch(updateName(name)),
-    onNext: questions => dispatch(onNext(questions)),
     nextURL: nextURL,
-    nextQuestion: nextQuestion,
-    addAnswer: answer => dispatch(addAnswer(answer))
+    answerQuestion: (question, answer) => dispatch(answerQuestion(question, answer)),
+    resetQuiz: () => dispatch({ type: RESET_QUIZ })
   }
 }
 
 export const ConnectedQuiz = connect(mapStateToProps, mapDispatchToProps)(Quiz)
 export const ConnectedQuestion = connect(mapStateToProps, mapDispatchToProps)(Question)
+export const ConnectedNextButton = connect(mapStateToProps, mapDispatchToProps)(NextButton)
+export const ConnectedResults = connect(mapStateToProps, mapDispatchToProps)(Results)
 
