@@ -94,6 +94,13 @@ div.spacer-2 {
 .top-buffer {
   padding-top: 40px; }
 
+.menu h1 {
+  text-align: center;
+  margin-bottom: 80px; }
+
+.menu .nextBtn {
+  margin-top: 20px; }
+
 .quiz h1 {
   text-align: center;
   margin-bottom: 80px; }

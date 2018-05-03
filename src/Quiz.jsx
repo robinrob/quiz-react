@@ -12,7 +12,7 @@ import { ConnectedNextButton } from './App'
 
 
 export default class Quiz extends React.Component {
-    async componentWillMount() {
+    async componentDidMount() {
         try {
             let response = await axios.get('/api/questions')
 
@@ -27,7 +27,7 @@ export default class Quiz extends React.Component {
             <div className="quiz top-buffer">
                 {row(
                     <h1>
-                        Welcome to the Cash Flow Quiz!
+                        Welcome to the {this.props.quiz.label} Quiz!
                     </h1>
                 )}
                 <form>

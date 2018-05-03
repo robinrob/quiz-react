@@ -7,6 +7,8 @@ import { Provider, connect } from 'react-redux';
 import { createStore } from 'redux';
 import axios from 'axios';
 
+import Menu from './Menu';
+import QuizOption from './QuizOption';
 import Quiz from './Quiz';
 import Question from './Question'
 import NextButton from './NextButton'
@@ -29,7 +31,8 @@ export default class App extends React.Component {
           <div className="App container">
             <div className="row">
               <div className="col-md-8 col-sm-9 col-xs-10">
-                <Route exact path="/quiz" component={ConnectedQuiz} />
+                <Route exact path="/menu" component={ConnectedMenu} />
+                <Route exact path="/quiz/:id" component={ConnectedQuiz} />
                 <Route exact path="/questions/:id" component={ConnectedQuestion} />
                 <Route exact path="/results" component={ConnectedResults} />
               </div>
@@ -44,20 +47,32 @@ export default class App extends React.Component {
 
 export const LOAD_QUESTIONS = 'LOAD_QUESTIONS'
 export const ON_NEXT = 'ON_NEXT'
+export const SET_QUIZ_ID = 'SET_QUIZ_ID'
 export const SET_NAME = 'SET_NAME'
 export const ANSWER_QUESTION = 'ANSWER_QUESTION'
 export const RESET_QUIZ = 'RESET_QUIZ'
 
 
+const quizes = [
+  {id: 'capitals', label: 'Capitals'},
+  {id: 'phobias', label: 'Phobias'}
+]
+
 const initialState = {
   name: '',
   questions: [],
-  answered_questions: []
+  answered_questions: [],
+  quizes: quizes,
+  quiz: quizes[0]
 }
 
 
 function quizApp(state = initialState, action) {
   switch (action.type) {
+    case SET_QUIZ_ID:
+      return Object.assign({}, state, {
+        quiz: action.quiz
+      })
     case LOAD_QUESTIONS:
       return Object.assign({}, state, {
         questions: action.questions
@@ -82,6 +97,7 @@ function quizApp(state = initialState, action) {
 }
 
 let store = createStore(quizApp)
+console.log(store.getState());
 
 const unsubscribe = store.subscribe(() => console.log(store.getState()))
 
@@ -106,6 +122,13 @@ function nextURL(questions, currentQuestion) {
   }
 }
 
+function setQuiz(quiz) {
+  return {
+    type: SET_QUIZ_ID,
+    quiz
+  }
+}
+
 function updateName(name) {
   return {
     type: SET_NAME,
@@ -123,6 +146,8 @@ function answerQuestion(question, answer) {
 
 const mapStateToProps = state => {
   return {
+    quizes: state.quizes,
+    selectedQuiz: state.quiz,
     name: state.name,
     currentQuestion: _.first(state.questions),
     questions: state.questions,
@@ -133,6 +158,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     loadQuestions: questions => dispatch(loadQuestions(questions)),
+    setQuiz: quiz => dispatch(setQuiz(quiz)),
     updateName: name => dispatch(updateName(name)),
     nextURL: nextURL,
     answerQuestion: (question, answer) => dispatch(answerQuestion(question, answer)),
@@ -140,6 +166,8 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
+export const ConnectedMenu = connect(mapStateToProps, mapDispatchToProps)(Menu)
+export const ConnectedQuizOption = connect(mapStateToProps, mapDispatchToProps)(QuizOption)
 export const ConnectedQuiz = connect(mapStateToProps, mapDispatchToProps)(Quiz)
 export const ConnectedQuestion = connect(mapStateToProps, mapDispatchToProps)(Question)
 export const ConnectedNextButton = connect(mapStateToProps, mapDispatchToProps)(NextButton)
