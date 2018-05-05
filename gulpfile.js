@@ -9,7 +9,7 @@ const prefix = require('gulp-autoprefixer')
 const proxy = require('proxy-middleware')
 const sass = require('gulp-sass')
 const watch = require('gulp-watch')
-const webpack = require('gulp-webpack')
+const webpack = require('webpack-stream')
 const url = require('url');
 
 const buildDir = 'dist'

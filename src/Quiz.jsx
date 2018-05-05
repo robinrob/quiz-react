@@ -30,16 +30,6 @@ export default class Quiz extends React.Component {
                         Welcome to the {this.props.quiz.label} Quiz!
                     </h1>
                 )}
-                <form>
-                    {row(
-                        <div className="form-group">
-                            <label>What is your name?</label>
-                            <input type="text" className="form-control" placeholder="Enter Your Name"
-                                   defaultValue={this.props.name} onChange={(e) => this.props.updateName(e.target.value)}
-                                   />
-                        </div>
-                    )}
-                </form>
                 {row(
                     <ConnectedNextButton {...this.props}
                         toURL={() => this.props.nextURL(this.props.questions)}

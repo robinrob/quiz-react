@@ -63,7 +63,7 @@ const initialState = {
   questions: [],
   answered_questions: [],
   quizes: quizes,
-  quiz: quizes[0]
+  quiz: {id: null, name: null}
 }
 
 
@@ -147,7 +147,7 @@ function answerQuestion(question, answer) {
 const mapStateToProps = state => {
   return {
     quizes: state.quizes,
-    selectedQuiz: state.quiz,
+    quiz: state.quiz,
     name: state.name,
     currentQuestion: _.first(state.questions),
     questions: state.questions,
