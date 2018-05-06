@@ -20,18 +20,16 @@ module.exports = {
         },
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader',
-                query: {
+                // Ignore any .babelrc file to avoid confusion
+                options: {
+                    babelrc: false,
                     presets: ['@babel/preset-react', '@babel/preset-env']
                 }
-            },
-            {
-                test: /.s(a|c)fdsss$/,
-                loaders: ['style-loader', 'css-loader', 'sass-loader']
             }
         ]
     },
