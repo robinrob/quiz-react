@@ -9,7 +9,7 @@ import { ConnectedNextButton, ConnectedQuizOption} from './App';
 function row(html) {
     return (
         <div className="row">
-            <div className="col-xs-12">
+            <div className="col-12">
                 {html}
             </div>
         </div>
@@ -52,7 +52,9 @@ export default class Menu extends React.Component {
                     </div>
                 )}
                 {row(
-                    this.props.quizes.map((quiz) => <React.Fragment key={quiz.id}>{this.quizOption(quiz)}</React.Fragment>)
+                    <div className="form-group">
+                        {this.props.quizes.map((quiz) => <React.Fragment key={quiz.id}>{this.quizOption(quiz)}</React.Fragment>)}
+                    </div>
                 )}
                 </form>
 

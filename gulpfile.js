@@ -25,17 +25,7 @@ const config = {
             dest: './'
         },
         sass: {
-            main: 'sass/main.sass',
-            src: 'sass/*',
-            dest: 'css/'
-        },
-        css: {
-            main: 'styles.css',
-            src: [
-                'css/main.css',
-                'node_modules/bootstrap-css/lib/*.css',
-            ],
-            dest: buildDir + '/css/'
+            src: 'src/sass/*'
         },
         js: {
             main: 'src/index.jsx',
@@ -87,32 +77,6 @@ gulp.task('html', function () {
         .pipe(gulp.dest(config.paths.html.dest))
 })
 
-gulp.task('sass', function () {
-    return gulp.src(config.paths.sass.main)
-        .pipe(sass({
-            includePaths: [config.paths.sass.src],
-            onError: onError
-        }))
-        .pipe(prefix(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], {cascade: true}))
-        .pipe(gulp.dest(config.paths.sass.dest))
-});
-
-gulp.task('css-concat', function () {
-    return gulp.src(config.paths.css.src)
-        .pipe(concat(config.paths.css.main))
-        .pipe(gulp.dest(config.paths.css.dest))
-});
-
-gulp.task('css-minify', function () {
-    return gulp.src(config.paths.css.dest + '/*.css')
-        .pipe(minifyCSS())
-        .pipe(gulp.dest(config.paths.css.dest))
-});
-
-gulp.task('css-dev', gulp.series('css-concat'));
-
-gulp.task('css', gulp.series('css-concat', 'css-minify'));
-
 gulp.task('fonts', function (done) {
     return gulp.src(config.paths.fonts.src)
         .pipe(gulp.dest(config.paths.fonts.dest))
@@ -143,9 +107,9 @@ gulp.task('js-lint', function() {
 
 gulp.task('js', gulp.series('webpack', 'js-lint'));
 
-gulp.task('build', gulp.series('clean', 'html', 'sass', gulp.parallel('css', 'js')));
+gulp.task('build', gulp.series('clean', 'html', 'js'));
 
-gulp.task('dev-build', gulp.series('clean', 'sass', gulp.parallel('css-dev', 'js'), 'reload'));
+gulp.task('dev-build', gulp.series('clean', 'js'), 'reload');
 
 gulp.task('dev-watch', function () {
     return watch(config.paths.watch, gulp.series('dev-build'))

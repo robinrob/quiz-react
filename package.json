@@ -20,6 +20,8 @@
     "axios": "^0.18.0",
     "babel-eslint": "^8.2.3",
     "babel-loader": "^8.0.0-beta",
+    "bootstrap": "^4.1.1",
+    "bootstrap-sass": "^3.3.7",
     "classnames": "^2.2.5",
     "css-loader": "^0.28.11",
     "eslint": "^4.19.1",
@@ -31,6 +33,7 @@
     "gulp-eslint": "^4.0.2",
     "gulp-watch": "^5.0.0",
     "json-loader": "^0.5.7",
+    "node-sass": "^4.9.0",
     "prop-types": "^15.5.10",
     "proxy-middleware": "^0.15.0",
     "query-string": "^5.1.0",
@@ -56,7 +59,6 @@
     "gulp-minify-html": "^1.0.6",
     "gulp-sass": "^3.1.0",
     "history": "^2.1.1",
-    "lodash": "^4.17.4",
-    "node-sass": "^3.6.0"
+    "lodash": "^4.17.4"
   }
 }
