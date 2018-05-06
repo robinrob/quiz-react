@@ -21,7 +21,7 @@ const config = {
             dest: './'
         },
         sass: {
-            src: 'src/sass/*'
+            src: 'src/styles/*'
         },
         js: {
             main: 'src/index.jsx',
@@ -105,7 +105,7 @@ gulp.task('js', gulp.series('webpack', 'js-lint'));
 
 gulp.task('build', gulp.series('clean', 'html', 'js'));
 
-gulp.task('dev-build', gulp.series('clean', 'js'), 'reload');
+gulp.task('dev-build', gulp.series('clean', 'js', 'reload'));
 
 gulp.task('dev-watch', function () {
     return watch(config.paths.watch, gulp.series('dev-build'))

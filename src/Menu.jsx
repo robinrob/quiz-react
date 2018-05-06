@@ -19,7 +19,11 @@ function row(html) {
 
 export default class Menu extends React.Component {
     quizOption(quiz) {
-        return <ConnectedQuizOption quizOption={quiz} setQuizId={this.props.setQuizId} />
+        return (
+            <div className="quizOption">
+                <ConnectedQuizOption quizOption={quiz} setQuizId={this.props.setQuizId} />
+            </div>
+        )
     }
 
     isDisabled() {
@@ -43,22 +47,22 @@ export default class Menu extends React.Component {
                                    />
                         </div>
                     )}
-                </form>
-                
-                <form className="form-inline">
-                {row(
-                    <div className="form-group">
-                        <label>Please choose a quiz:</label>
-                    </div>
-                )}
-                {row(
-                    <div className="form-group">
-                        {this.props.quizes.map((quiz) => <React.Fragment key={quiz.id}>{this.quizOption(quiz)}</React.Fragment>)}
-                    </div>
-                )}
-                </form>
+                    {row(
+                        <div className="form-group">
+                            <label>Please choose a quiz:</label>
+                        </div>
+                    )}
+                    </form>
+                    <form className="form-inline">
+                    {row(
+                        <div className="form-group">
+                            <label></label>
+                            {this.props.quizes.map((quiz) => <React.Fragment key={quiz.id}>{this.quizOption(quiz)}</React.Fragment>)}
+                        </div>
+                    )}
+                    </form>
+                    <form>
 
-                <form>
                 {row(
                     <ConnectedNextButton {...this.props}
                         toURL={() => "/quiz/"+this.props.quiz.id}
