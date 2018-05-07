@@ -1,18 +1,18 @@
 /*jshint esversion: 6 */
 
-import React from 'react';
-import { BrowserRouter as Router, HashRouter, Route, Link } from 'react-router-dom';
-import { withRouter } from 'react-router'
-import { Provider, connect } from 'react-redux';
-import { createStore } from 'redux';
-import axios from 'axios';
+import React from "react"
+import { HashRouter as Router, Route, Link} from "react-router-dom"
+import { Provider, connect } from "react-redux"
+import { createStore } from "redux"
 
-import Menu from './Menu';
-import QuizOption from './QuizOption';
-import Quiz from './Quiz';
-import Question from './Question'
-import NextButton from './NextButton'
-import Results from './Results'
+import _ from "lodash"
+
+import Menu from "./Menu"
+import QuizOption from "./QuizOption"
+import Quiz from "./Quiz"
+import Question from "./Question"
+import NextButton from "./NextButton"
+import Results from "./Results"
 
 
 export default class App extends React.Component {
@@ -27,8 +27,8 @@ export default class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <HashRouter>
-          <div className="App container">
+        <Router>
+          <div className="app container">
             <div className="row">
               <div className="col-md-8 col-sm-9 col-xs-10">
                 <Route exact path="/menu" component={ConnectedMenu} />
@@ -38,28 +38,28 @@ export default class App extends React.Component {
               </div>
             </div>
           </div>
-        </HashRouter>
+        </Router>
       </Provider>
-    );
+    )
   }
 }
   
 
-export const LOAD_QUESTIONS = 'LOAD_QUESTIONS'
-export const ON_NEXT = 'ON_NEXT'
-export const SET_QUIZ_ID = 'SET_QUIZ_ID'
-export const SET_NAME = 'SET_NAME'
-export const ANSWER_QUESTION = 'ANSWER_QUESTION'
-export const RESET_QUIZ = 'RESET_QUIZ'
+export const LOAD_QUESTIONS = "LOAD_QUESTIONS"
+export const ON_NEXT = "ON_NEXT"
+export const SET_QUIZ_ID = "SET_QUIZ_ID"
+export const SET_NAME = "SET_NAME"
+export const ANSWER_QUESTION = "ANSWER_QUESTION"
+export const RESET_QUIZ = "RESET_QUIZ"
 
 
 const quizes = [
-  {id: 'capitals', label: 'Capitals'},
-  {id: 'phobias', label: 'Phobias'}
+  {id: "capitals", label: "Capitals"},
+  {id: "phobias", label: "Phobias"}
 ]
 
 const initialState = {
-  name: '',
+  name: "",
   questions: [],
   answered_questions: [],
   quizes: quizes,
@@ -69,37 +69,36 @@ const initialState = {
 
 function quizApp(state = initialState, action) {
   switch (action.type) {
-    case SET_QUIZ_ID:
-      return Object.assign({}, state, {
-        quiz: action.quiz
-      })
-    case LOAD_QUESTIONS:
-      return Object.assign({}, state, {
-        questions: action.questions
-      })
-    case SET_NAME:
-      return Object.assign({}, state, {
-        name: action.name
-      })
-    case ANSWER_QUESTION:
-      return Object.assign({}, state, {
-        questions: state.questions.slice(1),
-        answered_questions: _.concat(
-          state.answered_questions,
-          [Object.assign(action.question, {answer: action.answer})]
-        )
-      })
-    case RESET_QUIZ:
-      return Object.assign(initialState, {name: state.name})
-    default:
-      return state
+  case SET_QUIZ_ID:
+    return Object.assign({}, state, {
+      quiz: action.quiz
+    })
+  case LOAD_QUESTIONS:
+    return Object.assign({}, state, {
+      questions: action.questions
+    })
+  case SET_NAME:
+    return Object.assign({}, state, {
+      name: action.name
+    })
+  case ANSWER_QUESTION:
+    return Object.assign({}, state, {
+      questions: state.questions.slice(1),
+      answered_questions: _.concat(
+        state.answered_questions,
+        [Object.assign(action.question, {answer: action.answer})]
+      )
+    })
+  case RESET_QUIZ:
+    return Object.assign(initialState, {name: state.name})
+  default:
+    return state
   }
 }
 
 let store = createStore(quizApp)
-console.log(store.getState());
 
-const unsubscribe = store.subscribe(() => console.log(store.getState()))
+store.subscribe(() => console.log(store.getState()))
 
 function loadQuestions(questions) {
   return {

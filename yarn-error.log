@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/Cellar/nvm/0.33.8/versions/node/v9.7.1/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js remove node-sass
+  /usr/local/Cellar/nvm/0.33.8/versions/node/v9.7.1/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js install gulp
 
 PATH: 
   /Users/robin/.rvm/gems/ruby-2.1.4@rakelib/bin:/Users/robin/.rvm/gems/ruby-2.1.4@global/bin:/Users/robin/.rvm/rubies/ruby-2.1.4/bin:/Users/robin/.rvm/bin:/Users/robin/.opam/4.06.0/bin:/usr/local/Cellar/nvm/0.33.8/versions/node/v9.7.1/bin:node_modules/.bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/robin/.yadr/bin:/Users/robin/.yadr/bin/yadr:/usr/local/lib/ec2-api-tools-1.6.11.0/bin:/Users/robin/Programming/robin/zsh/projects/dotfiles/local/bin:/Applications/Postgres.app/Contents/Versions/9.3/bin:/usr/local/Library/cocos2d-x-3.16/tools/cocos2d-console/bin:/usr/local/Library/pngquant:/usr/local/Cellar/android-ndk/r10e:/usr/local/Library/anaconda3/bin:/usr/local/Library/weechat-2.1/bin:./node_modules/.bin:/usr/local/Cellar/nvm/0.31.0:/usr/local/Cellar/node/5.7.0/bin:/usr/local/Cellar/octave/4.0.0/bin:/usr/local/Cellar/macvim/8.0-145_1/bin:/usr/local/Cellar/nvm/0.29.0:/Applications/Postgres.app/Contents/Versions/latest/bin
@@ -36,17 +36,16 @@ npm manifest:
       "axios": "^0.18.0",
       "babel-eslint": "^8.2.3",
       "babel-loader": "^8.0.0-beta",
+      "bootstrap": "^4.1.1",
+      "bootstrap-sass": "^3.3.7",
       "classnames": "^2.2.5",
       "css-loader": "^0.28.11",
-      "eslint": "^4.19.1",
-      "eslint-plugin-babel": "^5.1.0",
-      "eslint-plugin-react": "^7.7.0",
-      "extract-text-webpack-plugin": "^3.0.2",
       "gulp": "^4.0.0",
       "gulp-cli": "^2.0.1",
       "gulp-eslint": "^4.0.2",
       "gulp-watch": "^5.0.0",
       "json-loader": "^0.5.7",
+      "node-sass": "^4.9.0",
       "prop-types": "^15.5.10",
       "proxy-middleware": "^0.15.0",
       "query-string": "^5.1.0",
@@ -65,12 +64,11 @@ npm manifest:
     "devDependencies": {
       "bootstrap-css": "^3.3.7",
       "browser-sync": "^2.23.5",
-      "gulp-autoprefixer": "^4.1.0",
+      "eslint": "^4.19.1",
+      "eslint-plugin-react": "^7.7.0",
       "gulp-clean": "^0.4.0",
       "gulp-concat": "^2.6.1",
-      "gulp-minify-css": "^1.2.4",
       "gulp-minify-html": "^1.0.6",
-      "gulp-sass": "^3.1.0",
       "history": "^2.1.1",
       "lodash": "^4.17.4"
     }
@@ -786,7 +784,7 @@ Lockfile:
     version "3.2.0"
     resolved "https://registry.yarnpkg.com/ajv-keywords/-/ajv-keywords-3.2.0.tgz#e86b819c602cf8821ad637413698f1dec021847a"
   
-  ajv@^5.0.0, ajv@^5.1.0, ajv@^5.2.3, ajv@^5.3.0:
+  ajv@^5.1.0, ajv@^5.2.3, ajv@^5.3.0:
     version "5.5.2"
     resolved "https://registry.yarnpkg.com/ajv/-/ajv-5.5.2.tgz#73b5eeca3fab653e3d3f9422b341ad42205dc965"
     dependencies:
@@ -1099,7 +1097,7 @@ Lockfile:
     version "1.5.2"
     resolved "https://registry.yarnpkg.com/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
   
-  async@^2.1.2, async@^2.4.1:
+  async@^2.1.2:
     version "2.6.0"
     resolved "https://registry.yarnpkg.com/async/-/async-2.6.0.tgz#61a29abb6fcc026fea77e56d1c6ec53a795951f4"
     dependencies:
@@ -1122,17 +1120,6 @@ Lockfile:
       normalize-range "^0.1.2"
       num2fraction "^1.2.2"
       postcss "^5.2.16"
-      postcss-value-parser "^3.2.3"
-  
-  autoprefixer@^7.0.0:
-    version "7.2.6"
-    resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-7.2.6.tgz#256672f86f7c735da849c4f07d008abb056067dc"
-    dependencies:
-      browserslist "^2.11.3"
-      caniuse-lite "^1.0.30000805"
-      normalize-range "^0.1.2"
-      num2fraction "^1.2.2"
-      postcss "^6.0.17"
       postcss-value-parser "^3.2.3"
   
   aws-sign2@~0.6.0:
@@ -1180,14 +1167,6 @@ Lockfile:
       eslint-scope "~3.7.1"
       eslint-visitor-keys "^1.0.0"
   
-  babel-helper-builder-react-jsx@^6.24.1:
-    version "6.26.0"
-    resolved "https://registry.yarnpkg.com/babel-helper-builder-react-jsx/-/babel-helper-builder-react-jsx-6.26.0.tgz#39ff8313b75c8b65dceff1f31d383e0ff2a408a0"
-    dependencies:
-      babel-runtime "^6.26.0"
-      babel-types "^6.26.0"
-      esutils "^2.0.2"
-  
   babel-loader@^8.0.0-beta:
     version "8.0.0-beta.2"
     resolved "https://registry.yarnpkg.com/babel-loader/-/babel-loader-8.0.0-beta.2.tgz#4d5b67c964dc8c9cba866fd13d6b90df3acf8723"
@@ -1196,33 +1175,12 @@ Lockfile:
       loader-utils "^1.0.2"
       mkdirp "^0.5.1"
   
-  babel-plugin-syntax-jsx@^6.8.0:
-    version "6.18.0"
-    resolved "https://registry.yarnpkg.com/babel-plugin-syntax-jsx/-/babel-plugin-syntax-jsx-6.18.0.tgz#0af32a9a6e13ca7a3fd5069e62d7b0f58d0d8946"
-  
-  babel-plugin-transform-react-jsx@^6.24.1:
-    version "6.24.1"
-    resolved "https://registry.yarnpkg.com/babel-plugin-transform-react-jsx/-/babel-plugin-transform-react-jsx-6.24.1.tgz#840a028e7df460dfc3a2d29f0c0d91f6376e66a3"
-    dependencies:
-      babel-helper-builder-react-jsx "^6.24.1"
-      babel-plugin-syntax-jsx "^6.8.0"
-      babel-runtime "^6.22.0"
-  
-  babel-runtime@^6.11.6, babel-runtime@^6.22.0, babel-runtime@^6.26.0:
+  babel-runtime@^6.11.6:
     version "6.26.0"
     resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
     dependencies:
       core-js "^2.4.0"
       regenerator-runtime "^0.11.0"
-  
-  babel-types@^6.26.0:
-    version "6.26.0"
-    resolved "https://registry.yarnpkg.com/babel-types/-/babel-types-6.26.0.tgz#a3b073f94ab49eb6fa55cd65227a334380632497"
-    dependencies:
-      babel-runtime "^6.26.0"
-      esutils "^2.0.2"
-      lodash "^4.17.4"
-      to-fast-properties "^1.0.3"
   
   babylon@7.0.0-beta.44:
     version "7.0.0-beta.44"
@@ -1349,6 +1307,14 @@ Lockfile:
   bootstrap-css@^3.3.7:
     version "3.3.7"
     resolved "https://registry.yarnpkg.com/bootstrap-css/-/bootstrap-css-3.3.7.tgz#f5d436f1e7e5a8890483dcf59d5d5ae450cda25b"
+  
+  bootstrap-sass@^3.3.7:
+    version "3.3.7"
+    resolved "https://registry.yarnpkg.com/bootstrap-sass/-/bootstrap-sass-3.3.7.tgz#6596c7ab40f6637393323ab0bc80d064fc630498"
+  
+  bootstrap@^4.1.1:
+    version "4.1.1"
+    resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.1.1.tgz#3aec85000fa619085da8d2e4983dfd67cf2114cb"
   
   brace-expansion@^1.1.7:
     version "1.1.11"
@@ -1486,13 +1452,6 @@ Lockfile:
       caniuse-db "^1.0.30000639"
       electron-to-chromium "^1.2.7"
   
-  browserslist@^2.11.3:
-    version "2.11.3"
-    resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-2.11.3.tgz#fe36167aed1bbcde4827ebfe71347a2cc70b99b2"
-    dependencies:
-      caniuse-lite "^1.0.30000792"
-      electron-to-chromium "^1.3.30"
-  
   browserslist@^3.0.0:
     version "3.2.6"
     resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-3.2.6.tgz#138a44d04a9af64443679191d041f28ce5b965d5"
@@ -1523,12 +1482,6 @@ Lockfile:
       base64-js "^1.0.2"
       ieee754 "^1.1.4"
       isarray "^1.0.0"
-  
-  bufferstreams@1.0.1:
-    version "1.0.1"
-    resolved "https://registry.yarnpkg.com/bufferstreams/-/bufferstreams-1.0.1.tgz#cfb1ad9568d3ba3cfe935ba9abdd952de88aab2a"
-    dependencies:
-      readable-stream "^1.0.33"
   
   builtin-modules@^1.0.0:
     version "1.1.1"
@@ -1624,7 +1577,7 @@ Lockfile:
     version "1.0.30000833"
     resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000833.tgz#2bd7be72a401658d2cbcb8f4d7600deebeb1c676"
   
-  caniuse-lite@^1.0.30000792, caniuse-lite@^1.0.30000805, caniuse-lite@^1.0.30000830:
+  caniuse-lite@^1.0.30000830:
     version "1.0.30000833"
     resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000833.tgz#98e84fcdb4399c6fa0b0fd41490d3217ac7802b4"
   
@@ -1735,13 +1688,6 @@ Lockfile:
   classnames@^2.2.5:
     version "2.2.5"
     resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.5.tgz#fb3801d453467649ef3603c7d61a02bd129bde6d"
-  
-  clean-css@^3.3.3:
-    version "3.4.28"
-    resolved "https://registry.yarnpkg.com/clean-css/-/clean-css-3.4.28.tgz#bf1945e82fc808f55695e6ddeaec01400efd03ff"
-    dependencies:
-      commander "2.8.x"
-      source-map "0.4.x"
   
   cli-color@~1.1.0:
     version "1.1.0"
@@ -1913,12 +1859,6 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/combined-stream/-/combined-stream-1.0.6.tgz#723e7df6e801ac5613113a7e445a9b69cb632818"
     dependencies:
       delayed-stream "~1.0.0"
-  
-  commander@2.8.x:
-    version "2.8.1"
-    resolved "https://registry.yarnpkg.com/commander/-/commander-2.8.1.tgz#06be367febfda0c330aa1e2a072d3dc9762425d4"
-    dependencies:
-      graceful-readlink ">= 1.0.0"
   
   commander@^2.2.0, commander@^2.9.0:
     version "2.15.1"
@@ -2455,7 +2395,7 @@ Lockfile:
     version "1.1.1"
     resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
   
-  electron-to-chromium@^1.2.7, electron-to-chromium@^1.3.30, electron-to-chromium@^1.3.42:
+  electron-to-chromium@^1.2.7, electron-to-chromium@^1.3.42:
     version "1.3.45"
     resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.45.tgz#458ac1b1c5c760ce8811a16d2bfbd97ec30bafb8"
   
@@ -2689,12 +2629,6 @@ Lockfile:
       esrecurse "^4.1.0"
       estraverse "^4.1.1"
   
-  eslint-plugin-babel@^5.1.0:
-    version "5.1.0"
-    resolved "https://registry.yarnpkg.com/eslint-plugin-babel/-/eslint-plugin-babel-5.1.0.tgz#9c76e476162041e50b6ba69aa4eae3bdd6a4e1c3"
-    dependencies:
-      eslint-rule-composer "^0.3.0"
-  
   eslint-plugin-react@^7.7.0:
     version "7.7.0"
     resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.7.0.tgz#f606c719dbd8a1a2b3d25c16299813878cca0160"
@@ -2703,10 +2637,6 @@ Lockfile:
       has "^1.0.1"
       jsx-ast-utils "^2.0.1"
       prop-types "^15.6.0"
-  
-  eslint-rule-composer@^0.3.0:
-    version "0.3.0"
-    resolved "https://registry.yarnpkg.com/eslint-rule-composer/-/eslint-rule-composer-0.3.0.tgz#79320c927b0c5c0d3d3d2b76c8b4a488f25bbaf9"
   
   eslint-scope@^3.7.1, eslint-scope@~3.7.1:
     version "3.7.1"
@@ -2914,15 +2844,6 @@ Lockfile:
       regex-not "^1.0.0"
       snapdragon "^0.8.1"
       to-regex "^3.0.1"
-  
-  extract-text-webpack-plugin@^3.0.2:
-    version "3.0.2"
-    resolved "https://registry.yarnpkg.com/extract-text-webpack-plugin/-/extract-text-webpack-plugin-3.0.2.tgz#5f043eaa02f9750a9258b78c0a6e0dc1408fb2f7"
-    dependencies:
-      async "^2.4.1"
-      loader-utils "^1.1.0"
-      schema-utils "^0.3.0"
-      webpack-sources "^1.0.1"
   
   extsprintf@1.3.0:
     version "1.3.0"
@@ -3376,21 +3297,6 @@ Lockfile:
     version "4.1.11"
     resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.11.tgz#0e8bdfe4d1ddb8854d64e04ea7c00e2a026e5658"
   
-  "graceful-readlink@>= 1.0.0":
-    version "1.0.1"
-    resolved "https://registry.yarnpkg.com/graceful-readlink/-/graceful-readlink-1.0.1.tgz#4cafad76bc62f02fa039b2f94e9a3dd3a391a725"
-  
-  gulp-autoprefixer@^4.1.0:
-    version "4.1.0"
-    resolved "https://registry.yarnpkg.com/gulp-autoprefixer/-/gulp-autoprefixer-4.1.0.tgz#064af73cc02cadac8ff34d0bf93ffdfb94ea12aa"
-    dependencies:
-      autoprefixer "^7.0.0"
-      fancy-log "^1.3.2"
-      plugin-error "^0.1.2"
-      postcss "^6.0.1"
-      through2 "^2.0.0"
-      vinyl-sourcemaps-apply "^0.2.0"
-  
   gulp-clean@^0.4.0:
     version "0.4.0"
     resolved "https://registry.yarnpkg.com/gulp-clean/-/gulp-clean-0.4.0.tgz#3bc25e7084e641bbd7bde057cf90c01c50d95950"
@@ -3440,17 +3346,6 @@ Lockfile:
       fancy-log "^1.3.2"
       plugin-error "^1.0.0"
   
-  gulp-minify-css@^1.2.4:
-    version "1.2.4"
-    resolved "https://registry.yarnpkg.com/gulp-minify-css/-/gulp-minify-css-1.2.4.tgz#b6164957602ea27f9e5ad88227695dd205778c06"
-    dependencies:
-      clean-css "^3.3.3"
-      gulp-util "^3.0.5"
-      object-assign "^4.0.1"
-      readable-stream "^2.0.0"
-      vinyl-bufferstream "^1.0.1"
-      vinyl-sourcemaps-apply "^0.2.0"
-  
   gulp-minify-html@^1.0.6:
     version "1.0.6"
     resolved "https://registry.yarnpkg.com/gulp-minify-html/-/gulp-minify-html-1.0.6.tgz#f947f3f139475bbe1b08fffe714c4729f1ff070a"
@@ -3459,17 +3354,7 @@ Lockfile:
       minimize "^1.5.0"
       through2 "^0.6.1"
   
-  gulp-sass@^3.1.0:
-    version "3.2.1"
-    resolved "https://registry.yarnpkg.com/gulp-sass/-/gulp-sass-3.2.1.tgz#2e3688a96fd8be1c0c01340750c191b2e79fab94"
-    dependencies:
-      gulp-util "^3.0"
-      lodash.clonedeep "^4.3.2"
-      node-sass "^4.8.3"
-      through2 "^2.0.0"
-      vinyl-sourcemaps-apply "^0.2.0"
-  
-  gulp-util@^3.0, gulp-util@^3.0.3, gulp-util@^3.0.5, gulp-util@^3.0.7:
+  gulp-util@^3.0.3, gulp-util@^3.0.7:
     version "3.0.8"
     resolved "https://registry.yarnpkg.com/gulp-util/-/gulp-util-3.0.8.tgz#0054e1e744502e27c04c187c3ecc505dd54bbb4f"
     dependencies:
@@ -4866,7 +4751,7 @@ Lockfile:
     version "0.0.7"
     resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.7.tgz#3075ce93bc21b8fab43e1bc4da7e8115ed1e7bab"
   
-  nan@^2.10.0, nan@^2.3.2, nan@^2.9.2:
+  nan@^2.10.0, nan@^2.9.2:
     version "2.10.0"
     resolved "https://registry.yarnpkg.com/nan/-/nan-2.10.0.tgz#96d0cd610ebd58d4b4de9cc0c6828cda99c7548f"
   
@@ -4987,28 +4872,7 @@ Lockfile:
       semver "^5.3.0"
       tar "^4"
   
-  node-sass@^3.6.0:
-    version "3.13.1"
-    resolved "https://registry.yarnpkg.com/node-sass/-/node-sass-3.13.1.tgz#7240fbbff2396304b4223527ed3020589c004fc2"
-    dependencies:
-      async-foreach "^0.1.3"
-      chalk "^1.1.1"
-      cross-spawn "^3.0.0"
-      gaze "^1.0.0"
-      get-stdin "^4.0.1"
-      glob "^7.0.3"
-      in-publish "^2.0.0"
-      lodash.assign "^4.2.0"
-      lodash.clonedeep "^4.3.2"
-      meow "^3.7.0"
-      mkdirp "^0.5.1"
-      nan "^2.3.2"
-      node-gyp "^3.3.1"
-      npmlog "^4.0.0"
-      request "^2.61.0"
-      sass-graph "^2.1.1"
-  
-  node-sass@^4.8.3:
+  node-sass@^4.9.0:
     version "4.9.0"
     resolved "https://registry.yarnpkg.com/node-sass/-/node-sass-4.9.0.tgz#d1b8aa855d98ed684d6848db929a20771cc2ae52"
     dependencies:
@@ -5748,7 +5612,7 @@ Lockfile:
       source-map "^0.5.6"
       supports-color "^3.2.3"
   
-  postcss@^6.0.1, postcss@^6.0.17:
+  postcss@^6.0.1:
     version "6.0.22"
     resolved "https://registry.yarnpkg.com/postcss/-/postcss-6.0.22.tgz#e23b78314905c3b90cbd61702121e7a78848f2a3"
     dependencies:
@@ -6102,7 +5966,7 @@ Lockfile:
       isarray "0.0.1"
       string_decoder "~0.10.x"
   
-  readable-stream@^1.0.33, readable-stream@~1.1.9:
+  readable-stream@~1.1.9:
     version "1.1.14"
     resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-1.1.14.tgz#7cf4c54ef648e3813084c636dd2079e166c081d9"
     dependencies:
@@ -6279,7 +6143,7 @@ Lockfile:
       is-absolute "^1.0.0"
       remove-trailing-separator "^1.1.0"
   
-  request@2, request@^2.61.0:
+  request@2:
     version "2.85.0"
     resolved "https://registry.yarnpkg.com/request/-/request-2.85.0.tgz#5a03615a47c61420b3eb99b7dba204f83603e1fa"
     dependencies:
@@ -6458,7 +6322,7 @@ Lockfile:
     version "2.1.2"
     resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
   
-  sass-graph@^2.1.1, sass-graph@^2.2.4:
+  sass-graph@^2.2.4:
     version "2.2.4"
     resolved "https://registry.yarnpkg.com/sass-graph/-/sass-graph-2.2.4.tgz#13fbd63cd1caf0908b9fd93476ad43a51d1e0b49"
     dependencies:
@@ -6480,12 +6344,6 @@ Lockfile:
   sax@^1.2.4, sax@~1.2.1:
     version "1.2.4"
     resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
-  
-  schema-utils@^0.3.0:
-    version "0.3.0"
-    resolved "https://registry.yarnpkg.com/schema-utils/-/schema-utils-0.3.0.tgz#f5877222ce3e931edae039f17eb3716e7137f8cf"
-    dependencies:
-      ajv "^5.0.0"
   
   schema-utils@^0.4.4, schema-utils@^0.4.5:
     version "0.4.5"
@@ -6753,13 +6611,13 @@ Lockfile:
     version "0.4.0"
     resolved "https://registry.yarnpkg.com/source-map-url/-/source-map-url-0.4.0.tgz#3e935d7ddd73631b97659956d55128e87b5084a3"
   
-  source-map@0.4.x, source-map@^0.4.2:
+  source-map@^0.4.2:
     version "0.4.4"
     resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.4.4.tgz#eba4f5da9c0dc999de68032d8b4f76173652036b"
     dependencies:
       amdefine ">=0.0.4"
   
-  source-map@^0.5.0, source-map@^0.5.1, source-map@^0.5.3, source-map@^0.5.6, source-map@~0.5.1:
+  source-map@^0.5.0, source-map@^0.5.3, source-map@^0.5.6, source-map@~0.5.1:
     version "0.5.7"
     resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.5.7.tgz#8a039d2d1021d22d1ea14c80d8ea468ba2ef3fcc"
   
@@ -7136,10 +6994,6 @@ Lockfile:
     version "1.0.1"
     resolved "https://registry.yarnpkg.com/to-arraybuffer/-/to-arraybuffer-1.0.1.tgz#7d229b1fcc637e466ca081180836a7aabff83f43"
   
-  to-fast-properties@^1.0.3:
-    version "1.0.3"
-    resolved "https://registry.yarnpkg.com/to-fast-properties/-/to-fast-properties-1.0.3.tgz#b83571fa4d8c25b82e231b06e3a3055de4ca1a47"
-  
   to-fast-properties@^2.0.0:
     version "2.0.0"
     resolved "https://registry.yarnpkg.com/to-fast-properties/-/to-fast-properties-2.0.0.tgz#dc5e698cbd079265bc73e0377681a4e4e83f616e"
@@ -7459,12 +7313,6 @@ Lockfile:
       core-util-is "1.0.2"
       extsprintf "^1.2.0"
   
-  vinyl-bufferstream@^1.0.1:
-    version "1.0.1"
-    resolved "https://registry.yarnpkg.com/vinyl-bufferstream/-/vinyl-bufferstream-1.0.1.tgz#0537869f580effa4ca45acb47579e4b9fe63081a"
-    dependencies:
-      bufferstreams "1.0.1"
-  
   vinyl-file@^2.0.0:
     version "2.0.0"
     resolved "https://registry.yarnpkg.com/vinyl-file/-/vinyl-file-2.0.0.tgz#a7ebf5ffbefda1b7d18d140fcb07b223efb6751a"
@@ -7509,12 +7357,6 @@ Lockfile:
       now-and-later "^2.0.0"
       remove-bom-buffer "^3.0.0"
       vinyl "^2.0.0"
-  
-  vinyl-sourcemaps-apply@^0.2.0:
-    version "0.2.1"
-    resolved "https://registry.yarnpkg.com/vinyl-sourcemaps-apply/-/vinyl-sourcemaps-apply-0.2.1.tgz#ab6549d61d172c2b1b87be5c508d239c8ef87705"
-    dependencies:
-      source-map "^0.5.1"
   
   vinyl@^0.5.0:
     version "0.5.3"
@@ -7845,9 +7687,9 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/yeast/-/yeast-0.1.2.tgz#008e06d8094320c372dbc2f8ed76a0ca6c8ac419"
 
 Trace: 
-  Error: This module isn't specified in a manifest.
+  Error: `install` has been replaced with `add` to add new dependencies. Run "yarn add gulp" instead.
       at new MessageError (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:186:110)
-      at Object.<anonymous> (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:60445:15)
+      at Object.<anonymous> (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:21987:13)
       at Generator.next (<anonymous>)
       at step (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:98:30)
       at /usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:109:13

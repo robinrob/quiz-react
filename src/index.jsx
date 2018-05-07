@@ -1,17 +1,16 @@
-import './styles/main.sass';
-import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
+import "./styles/main.sass"
 
-import React from 'react';
-import { render } from 'react-dom';
+import { render } from "react-dom"
 
-import App from './App';
+import React from "react"
+import App from "./App"
 
 
 const renderApp = () => {
   render(
     <App />,
-    document.getElementById('root')
-  );
-};
+    document.getElementById("root")
+  )
+}
 
-renderApp();
+renderApp()
