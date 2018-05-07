@@ -1,10 +1,10 @@
-import React from "react";
+import React from "react"
 
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
 
-import "react-bootstrap";
+import "react-bootstrap"
 
-import { ConnectedNextButton, ConnectedQuizOption} from "./App";
+import { ConnectedNextButton, ConnectedQuizOption } from "./App"
 
 function row(html) {
   return (
