@@ -19,11 +19,11 @@ export default class App extends React.Component {
   constructor(props) {
     super(props)
   }
-
+  
   getAnswers() {
     return this.state.answers
   }
-
+  
   render() {
     return (
       <Provider store={store}>
@@ -43,7 +43,7 @@ export default class App extends React.Component {
     )
   }
 }
-  
+
 
 export const LOAD_QUESTIONS = "LOAD_QUESTIONS"
 export const ON_NEXT = "ON_NEXT"
@@ -69,44 +69,44 @@ const initialState = {
 
 function quizApp(state = initialState, action) {
   switch (action.type) {
-  case SET_QUIZ_ID:
-    return Object.assign({}, state, {
-      quiz: action.quiz
-    })
-  case LOAD_QUESTIONS:
-    return Object.assign({}, state, {
-      questions: action.questions
-    })
-  case SET_NAME:
-    return Object.assign({}, state, {
-      name: action.name
-    })
-  case ANSWER_QUESTION:
-    return Object.assign({}, state, {
-      questions: state.questions.slice(1),
-      answered_questions: _.concat(
-        state.answered_questions,
-        [Object.assign(action.question, {answer: action.answer})]
-      )
-    })
-  case RESET_QUIZ:
-    return Object.assign(initialState, {name: state.name})
-  default:
-    return state
+    case SET_QUIZ_ID:
+      return Object.assign({}, state, {
+        quiz: action.quiz
+      })
+    case LOAD_QUESTIONS:
+      return Object.assign({}, state, {
+        questions: action.questions
+      })
+    case SET_NAME:
+      return Object.assign({}, state, {
+        name: action.name
+      })
+    case ANSWER_QUESTION:
+      return Object.assign({}, state, {
+        questions: state.questions.slice(1),
+        answered_questions: _.concat(
+          state.answered_questions,
+          [Object.assign(action.question, {answer: action.answer})]
+        )
+      })
+    case RESET_QUIZ:
+      return Object.assign(initialState, {name: state.name})
+    default:
+      return state
   }
 }
 
 // let store = createStore(quizApp)
 // Save redux store in window object between hot reloads
 const store = (() => {
-  if ((process.env.NODE_ENV === 'development') && window.store) {
-    return window.store;
+  if ((process.env.NODE_ENV === "development") && window.store) {
+    return window.store
   }
-  const store = createStore(quizApp);
-   if (process.env.NODE_ENV === 'development') { 
-     window.store = store;
-   }
-   return store;
+  const store = createStore(quizApp)
+  if (process.env.NODE_ENV === "development") { 
+    window.store = store
+  }
+  return store
 })()
 
 store.subscribe(() => console.log(store.getState()))
@@ -124,7 +124,7 @@ function nextURL(questions, currentQuestion) {
     remainingQuestions = _.filter(questions, (q) => q.id != currentQuestion.id)
   }
   let nextQuestion = _.first(remainingQuestions)
-
+  
   if (_.isObject(nextQuestion)) {
     return "/questions/"+nextQuestion.id
   } else {

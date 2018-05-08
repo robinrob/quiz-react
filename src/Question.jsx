@@ -3,19 +3,26 @@ import PropTypes from "prop-types"
 import { ConnectedNextButton } from "./App"
 
 
+const initialState = {
+  answer: null
+}
+
 export default class Question extends React.Component {
   constructor(props) {
     super(props)
     
-    this.state = {
-      answer: null
-    }
+    this.state = initialState
   }
   
   updateAnswer(answer) {
     this.setState({
       answer: answer
     })
+  }
+
+  answerCurrentQuestionAndgoToNext() {
+    this.props.answerQuestion(this.props.currentQuestion, this.state.answer)
+    this.setState(initialState)
   }
   
   answerRow(answer) {
@@ -34,7 +41,7 @@ export default class Question extends React.Component {
   
   render() {
     return (
-      <div className="question top-buffer">
+      <div className="question top-buffer" key={this.props.currentQuestion.id}>
         {row(<h2>{this.props.currentQuestion.title}</h2>)}
         <form>
           {this.props.currentQuestion.answers.map((answer) => this.answerRow(answer))}
@@ -43,7 +50,7 @@ export default class Question extends React.Component {
           <ConnectedNextButton {...this.props}
             toURL={() => this.props.nextURL(this.props.questions, this.props.currentQuestion)}
             isDisabled={() => !this.state.answer }
-            onNext={() => this.props.answerQuestion(this.props.currentQuestion, this.state.answer)}
+            onNext={() => this.answerCurrentQuestionAndgoToNext()}
           />
         )}
       </div>

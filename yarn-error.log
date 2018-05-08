@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/Cellar/nvm/0.33.8/versions/node/v9.7.1/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js start
+  /usr/local/Cellar/nvm/0.33.8/versions/node/v9.7.1/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js lint
 
 PATH: 
   /Users/robin/.rvm/gems/ruby-2.1.4@rakelib/bin:/Users/robin/.rvm/gems/ruby-2.1.4@global/bin:/Users/robin/.rvm/rubies/ruby-2.1.4/bin:/Users/robin/.rvm/bin:node_modules/.bin:/Users/robin/.opam/4.06.0/bin:/usr/local/Cellar/nvm/0.33.8/versions/node/v9.7.1/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/robin/.yadr/bin:/Users/robin/.yadr/bin/yadr:/usr/local/lib/ec2-api-tools-1.6.11.0/bin:/Users/robin/Programming/robin/zsh/projects/dotfiles/local/bin:/Applications/Postgres.app/Contents/Versions/9.3/bin:/usr/local/Library/cocos2d-x-3.16/tools/cocos2d-console/bin:/usr/local/Library/pngquant:/usr/local/Cellar/android-ndk/r10e:/usr/local/Library/anaconda3/bin:/usr/local/Library/weechat-2.1/bin:./node_modules/.bin:/usr/local/Cellar/nvm/0.31.0:/usr/local/Cellar/node/5.7.0/bin:/usr/local/Cellar/octave/4.0.0/bin:/usr/local/Cellar/macvim/8.0-145_1/bin:/usr/local/Cellar/nvm/0.29.0:/Applications/Postgres.app/Contents/Versions/latest/bin
@@ -21,7 +21,7 @@ npm manifest:
     "main": "index.js",
     "scripts": {
       "lint": "eslint **/*.jsx",
-      "start": "webpack-dev-server",
+      "start": "webpack-dev-server --hot --history-api-fallback",
       "build": "webpack",
       "test": "echo \"Error: no test specified\" && exit 1"
     },
@@ -8171,7 +8171,7 @@ Trace:
   Error: Command failed.
   Exit code: 1
   Command: sh
-  Arguments: -c webpack-dev-server
+  Arguments: -c eslint **/*.jsx
   Directory: /Users/robin/Programming/robin/javascript/projects/quiz-react
   Output:
   
