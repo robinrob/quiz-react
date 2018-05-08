@@ -96,7 +96,18 @@ function quizApp(state = initialState, action) {
   }
 }
 
-let store = createStore(quizApp)
+// let store = createStore(quizApp)
+// Save redux store in window object between hot reloads
+const store = (() => {
+  if ((process.env.NODE_ENV === 'development') && window.store) {
+    return window.store;
+  }
+  const store = createStore(quizApp);
+   if (process.env.NODE_ENV === 'development') { 
+     window.store = store;
+   }
+   return store;
+})()
 
 store.subscribe(() => console.log(store.getState()))
 

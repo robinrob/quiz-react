@@ -29,12 +29,12 @@ module.exports = {
   devServer: {
     contentBase: './',
     publicPath: "http://localhost:8080",
-    // proxy: {
-    //   "/api": {
-    //     target: "http://localhost:3001",
-    //     pathRewrite: {"^/api" : ""}
-    //   }
-    // },
+    proxy: {
+      "/api": {
+        target: "http://localhost:3001",
+        pathRewrite: {"^/api" : ""}
+      }
+    },
     hot: true
   },
   output: {

@@ -26,7 +26,7 @@ export default class Menu extends React.Component {
   }
   
   isDisabled() {
-    return !this.props.quiz.id || !this.props.name
+    return !this.props.quiz || !this.props.name
   }
   
   render() {

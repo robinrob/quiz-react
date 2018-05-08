@@ -24,7 +24,7 @@ export default class Quiz extends React.Component {
       <div className="quiz top-buffer">
         {row(
           <h1>
-            Welcome to the {this.props.quiz.label} Quiz!
+            Welcome to the {this.props.quiz.label} Quiz! 
           </h1>
         )}
         {row(
