@@ -70,27 +70,19 @@ const initialState = {
 function quizApp(state = initialState, action) {
   switch (action.type) {
     case SET_QUIZ_ID:
-      return Object.assign({}, state, {
-        quiz: action.quiz
-      })
+      return {...state, quiz: action.quiz}
     case LOAD_QUESTIONS:
-      return Object.assign({}, state, {
-        questions: action.questions
-      })
+      return {...state, questions: action.questions}
     case SET_NAME:
-      return Object.assign({}, state, {
-        name: action.name
-      })
+      return {...state, name: action.name }
     case ANSWER_QUESTION:
-      return Object.assign({}, state, {
-        questions: state.questions.slice(1),
-        answered_questions: _.concat(
-          state.answered_questions,
-          [Object.assign(action.question, {answer: action.answer})]
-        )
-      })
+      return {
+        ...state,
+        questions: [...state.questions].slice(1),
+        answered_questions: [...state.answered_questions, {...action.question, answer: action.answer}]
+      }
     case RESET_QUIZ:
-      return Object.assign(initialState, {name: state.name})
+      return {...initialState, name: state.name}
     default:
       return state
   }
