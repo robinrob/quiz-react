@@ -1,4 +1,5 @@
 import "./styles/main.sass"
+import "bootstrap/dist/css/bootstrap.css"
 
 import { render } from "react-dom"
 
