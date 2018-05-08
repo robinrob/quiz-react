@@ -10,26 +10,27 @@ module.exports = {
   //   "@babel/polyfill",
   //   "./src/index.jsx",
   //   ],
-  //   ReactStuff:[
-  //     'react', 
-  //     'react-dom', 
-  //     'react-router', 
-  //     'redux', 
-  //     'react-redux'
-  //   ],
-  //   BootstrapStuff: [
-  //     'bootstrap', 
-  //     'react-bootstrap', 
-  //     'chartjs', 
-  //     'skypager-themes!skypager-themes/packages/dashboard-dark'
-  //   ]
+  //   // ReactStuff:[
+  //   //   'react', 
+  //   //   'react-dom', 
+  //   //   'react-router', 
+  //   //   'redux', 
+  //   //   'react-redux'
+  //   // ],
+  //   // BootstrapStuff: [
+  //   //   'bootstrap', 
+  //   //   'react-bootstrap'
+  //   // ]
   // },
   devServer: {
-    contentBase: './'
+    contentBase: './',
+    watchContentBase: true,
+    publicPath: '/dist/'
+    // hot: true
   },
   output: {
     path: path.resolve(__dirname, 'dist'), 
-    filename: 'bundle.js',
+    filename: 'bundle.js'
     // filename: '[name].dll.js', 
     // library: '[name]', 
   },
@@ -99,6 +100,7 @@ module.exports = {
     ]
   },
   plugins: [
+    // new webpack.HotModuleReplacementPlugin()
     // new webpack.DllPlugin({ 
     //   name: '[name]', 
     //   path: path.join('dist', '[name].json')
