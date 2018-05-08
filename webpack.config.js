@@ -1,21 +1,45 @@
+const webpack = require("webpack")
 const path = require("path")
 
 module.exports = {
+  mode: 'development',
   devtool: "inline-source-map",
-  entry: [
-    "@babel/polyfill",
-    "./src/index.jsx",
-  ],
+  entry: ["@babel/polyfill", "./src/index.jsx"],
+  // entry: {
+  //   main: [
+  //   "@babel/polyfill",
+  //   "./src/index.jsx",
+  //   ],
+  //   ReactStuff:[
+  //     'react', 
+  //     'react-dom', 
+  //     'react-router', 
+  //     'redux', 
+  //     'react-redux'
+  //   ],
+  //   BootstrapStuff: [
+  //     'bootstrap', 
+  //     'react-bootstrap', 
+  //     'chartjs', 
+  //     'skypager-themes!skypager-themes/packages/dashboard-dark'
+  //   ]
+  // },
+  devServer: {
+    contentBase: './'
+  },
   output: {
-    path: path.resolve(__dirname, "dist/"),
-    filename: "bundle.js"
+    path: path.resolve(__dirname, 'dist'), 
+    filename: 'bundle.js',
+    // filename: '[name].dll.js', 
+    // library: '[name]', 
   },
   resolve: {
-    modules: ["node_modules", "src", "dist"],
+    modules: ["node_modules", "src"],
     extensions: [".js", ".jsx"],
     alias: {
       react: path.resolve("./node_modules/react")
     },
+    symlinks: false,
   },
   module: {
     rules: [
@@ -63,8 +87,8 @@ module.exports = {
         ]
       },
       {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
+        test: /\.jsx$/,
+        include: path.resolve(__dirname, "src"),
         loader: "babel-loader",
         // Ignore any .babelrc file to avoid confusion
         options: {
@@ -73,5 +97,11 @@ module.exports = {
         }
       },
     ]
-  }
+  },
+  plugins: [
+    // new webpack.DllPlugin({ 
+    //   name: '[name]', 
+    //   path: path.join('dist', '[name].json')
+    // })
+  ]
 }
