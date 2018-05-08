@@ -3,8 +3,12 @@ const path = require("path")
 
 module.exports = {
   mode: 'development',
-  devtool: "inline-source-map",
-  entry: ["@babel/polyfill", "./src/index.jsx"],
+  devtool: "source-map",
+  entry: [
+    '@babel/polyfill',
+    'react-hot-loader/patch',
+    './src/index'
+  ],
   // entry: {
   //   main: [
   //   "@babel/polyfill",
@@ -24,15 +28,18 @@ module.exports = {
   // },
   devServer: {
     contentBase: './',
-    watchContentBase: true,
-    publicPath: '/dist/'
-    // hot: true
+    publicPath: "http://localhost:8080",
+    // proxy: {
+    //   "/api": {
+    //     target: "http://localhost:3001",
+    //     pathRewrite: {"^/api" : ""}
+    //   }
+    // },
+    hot: true
   },
   output: {
-    path: path.resolve(__dirname, 'dist'), 
+    path: path.resolve(__dirname, './dist'),
     filename: 'bundle.js'
-    // filename: '[name].dll.js', 
-    // library: '[name]', 
   },
   resolve: {
     modules: ["node_modules", "src"],
