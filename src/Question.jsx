@@ -44,7 +44,7 @@ export default class Question extends React.Component {
       <div className="question top-buffer" key={this.props.currentQuestion.id}>
         {row(<h2>{this.props.currentQuestion.title}</h2>)}
         <form>
-          {this.props.currentQuestion.answers.map((answer) => this.answerRow(answer))}
+          {this.props.currentQuestion.multiple_choice_answers.map((answer) => this.answerRow(answer))}
         </form>
         {row(
           <ConnectedNextButton {...this.props}

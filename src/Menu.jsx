@@ -1,6 +1,7 @@
 import React from "react"
 
 import PropTypes from "prop-types"
+import axios from 'axios'
 
 import "react-bootstrap"
 
@@ -17,6 +18,26 @@ function row(html) {
 }
 
 export default class Menu extends React.Component {
+  constructor(props) {
+    super(props)
+    
+    this.state = {
+      quizzes: []
+    }
+  }
+
+  async componentDidMount() {
+    try {
+      let response = await axios.get("/api/quizzes")
+
+      this.setState({
+        quizzes: response.data
+      })
+    } catch(error) {
+      alert("quizzes failed to load: " + error)
+    }
+  }
+  
   quizOption(quiz) {
     return (
       <div className="quizOption">
@@ -56,7 +77,7 @@ export default class Menu extends React.Component {
           {row(
             <div className="form-group">
               <label></label>
-              {this.props.quizes.map((quiz) => <React.Fragment key={quiz.id}>{this.quizOption(quiz)}</React.Fragment>)}
+              {this.state.quizzes.map((quiz) => <React.Fragment key={quiz.id}>{this.quizOption(quiz)}</React.Fragment>)}
             </div>
           )}
         </form>
@@ -64,7 +85,7 @@ export default class Menu extends React.Component {
           
           {row(
             <ConnectedNextButton {...this.props}
-              toURL={() => "/quiz/"+this.props.quiz.id}
+              toURL={() => "/quiz/"}
               isDisabled={() => this.isDisabled() }
             />
           )}
@@ -78,6 +99,5 @@ Menu.propTypes = {
   updateName: PropTypes.func,
   setQuiz: PropTypes.func,
   name: PropTypes.string,
-  quiz: PropTypes.object,
-  quizes: PropTypes.arrayOf(PropTypes.object)
+  quiz: PropTypes.object
 }

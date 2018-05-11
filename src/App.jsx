@@ -32,7 +32,7 @@ export default class App extends React.Component {
             <div className="row">
               <div className="col-md-8 col-sm-9 col-xs-10">
                 <Route exact path="/menu" component={ConnectedMenu} />
-                <Route exact path="/quiz/:id" component={ConnectedQuiz} />
+                <Route exact path="/quiz" component={ConnectedQuiz} />
                 <Route exact path="/questions/:id" component={ConnectedQuestion} />
                 <Route exact path="/results" component={ConnectedResults} />
               </div>
@@ -53,16 +53,10 @@ export const ANSWER_QUESTION = "ANSWER_QUESTION"
 export const RESET_QUIZ = "RESET_QUIZ"
 
 
-const quizes = [
-  {id: "capitals", label: "Capitals"},
-  {id: "phobias", label: "Phobias"}
-]
-
 const initialState = {
   name: "",
   questions: [],
   answered_questions: [],
-  quizes: quizes,
   quiz: {id: null, name: null}
 }
 

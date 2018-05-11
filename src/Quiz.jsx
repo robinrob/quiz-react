@@ -11,9 +11,11 @@ import { ConnectedNextButton } from "./App"
 export default class Quiz extends React.Component {
   async componentDidMount() {
     try {
-      let response = await axios.get("/api/questions")
+      let response = await axios.get("/api/quizzes/" + this.props.quiz.id)
+      console.log('response: ' + JSON.stringify(response, null, '\t'))
+
       
-      this.props.loadQuestions(response.data)
+      this.props.loadQuestions(response.data.questions)
     } catch(error) {
       alert("questions failed to load")
     }
@@ -41,7 +43,6 @@ export default class Quiz extends React.Component {
 Quiz.propTypes = {
   name: PropTypes.string,
   quiz: PropTypes.object,  
-  questions: PropTypes.arrayOf(PropTypes.object),  
   nextURL: PropTypes.func,
   loadQuestions: PropTypes.func
 }
