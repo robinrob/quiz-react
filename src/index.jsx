@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.css"
 import ReactDOM from "react-dom"
 import { AppContainer } from "react-hot-loader"
 import React from "react"
-import App from "./App"
+import Root from "./Root"
 
 const render = Component => {
   ReactDOM.render(
@@ -15,14 +15,14 @@ const render = Component => {
   )
 }
 
-render(App)
+render(Root)
 
 if (module.hot) {
-  module.hot.accept("./App", () => {
-    const NextApp = require("./App").default
+  module.hot.accept("./Root", () => {
+    const NextRoot = require("./Root").default
     ReactDOM.render(
       <AppContainer>
-        <NextApp />
+        <NextRoot />
       </AppContainer>,
       document.getElementById("root")
     )

@@ -1,6 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { ConnectedNextButton } from "./App"
+import NextButton from "components/NextButton"
 
 
 const initialState = {
@@ -36,7 +36,7 @@ export default class Question extends React.Component {
       <div key={answer.id} className="answer-row">
         {row(
           <div className="form-inline form-group">
-            <input type="radio" className="answer-radio" name="answer" value={answer.id} onChange={() => this.updateAnswer(answer)} checked={this.props.keyPressed == index+1} ref="checkbox"/>
+            <input type="radio" className="answer-radio" name="answer" value={answer.id} onChange={() => this.updateAnswer(answer)} checked={this.props.keyPressed == "" + (index+1)} ref="checkbox"/>
             <label>{answer.text}</label>
           </div>,
           answer.id
@@ -53,7 +53,7 @@ export default class Question extends React.Component {
           {this.props.currentQuestion.multiple_choice_answers.map((answer, index) => this.answerRow(answer, index))}
         </form>
         {row(
-          <ConnectedNextButton {...this.props}
+          <NextButton {...this.props}
             toURL={() => this.props.nextURL(this.props.questions, this.props.currentQuestion)}
             isDisabled={() => !this.state.answer }
             onNext={() => this.answerCurrentQuestionAndgoToNext()}
@@ -68,7 +68,8 @@ Question.propTypes = {
   name: PropTypes.string,
   quiz: PropTypes.object,  
   currentQuestion: PropTypes.object,
-  questions: PropTypes.arrayOf(PropTypes.object),  
+  questions: PropTypes.arrayOf(PropTypes.object),
+  pressedKey: PropTypes.string,
   nextURL: PropTypes.func,
   answerQuestion: PropTypes.func
 }

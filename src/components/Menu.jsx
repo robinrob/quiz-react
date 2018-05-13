@@ -5,7 +5,8 @@ import axios from 'axios'
 
 import "react-bootstrap"
 
-import { ConnectedNextButton, ConnectedQuizOption } from "./App"
+import NextButton from "components/NextButton"
+import ConnectedQuizOption from "containers/ConnectedQuizOption"
 
 function row(html) {
   return (
@@ -84,7 +85,7 @@ export default class Menu extends React.Component {
         <form>
           
           {row(
-            <ConnectedNextButton {...this.props}
+            <NextButton {...this.props}
               toURL={() => "/quiz/"}
               isDisabled={() => this.isDisabled() }
             />

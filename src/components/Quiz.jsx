@@ -6,14 +6,14 @@ import "react-bootstrap"
 
 import axios from "axios"
 
-import { ConnectedNextButton } from "./App"
+import NextButton from "components/NextButton"
 
 export default class Quiz extends React.Component {
   async componentDidMount() {
     try {
       let response = await axios.get("/api/quizzes/" + this.props.quiz.id)
       
-      this.props.loadQuestions(response.data.questions)
+      this.props.loadQuestions(response.data.questions.slice(0, 2))
     } catch(error) {
       alert("questions failed to load")
     }
@@ -28,7 +28,7 @@ export default class Quiz extends React.Component {
           </h1>
         )}
         {row(
-          <ConnectedNextButton {...this.props}
+          <NextButton {...this.props}
             toURL={() => this.props.nextURL(this.props.questions)}
             isDisabled={() => !this.props.name }
           />
@@ -42,6 +42,7 @@ Quiz.propTypes = {
   name: PropTypes.string,
   quiz: PropTypes.object,  
   nextURL: PropTypes.func,
+  questions: PropTypes.array,
   loadQuestions: PropTypes.func
 }
 
