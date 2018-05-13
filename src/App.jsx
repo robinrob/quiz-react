@@ -23,14 +23,18 @@ export default class App extends React.Component {
   getAnswers() {
     return this.state.answers
   }
+
+  onKeyUp() {
+
+  }
   
   render() {
     return (
       <Provider store={store}>
         <Router>
-          <div className="app container">
+          <div id="app" className="app container" onKeyUp={() => this.onKeyUp()}>
             <div className="row">
-              <div className="col-md-8 col-sm-9 col-xs-10">
+              <div className="offset-md-2 col-md-4">
                 <Route exact path="/menu" component={ConnectedMenu} />
                 <Route exact path="/quiz" component={ConnectedQuiz} />
                 <Route exact path="/questions/:id" component={ConnectedQuestion} />
@@ -51,13 +55,15 @@ export const SET_QUIZ_ID = "SET_QUIZ_ID"
 export const SET_NAME = "SET_NAME"
 export const ANSWER_QUESTION = "ANSWER_QUESTION"
 export const RESET_QUIZ = "RESET_QUIZ"
+export const KEY_PRESSED = "KEY_PRESSED"
 
 
 const initialState = {
   name: "",
   questions: [],
   answered_questions: [],
-  quiz: {id: null, name: null}
+  quiz: {id: null, name: null},
+  keyPressed: null
 }
 
 
@@ -77,6 +83,8 @@ function quizApp(state = initialState, action) {
       }
     case RESET_QUIZ:
       return {...initialState, name: state.name}
+    case KEY_PRESSED:
+      return {...state, keyPressed: action.key}
     default:
       return state
   }
@@ -147,7 +155,8 @@ const mapStateToProps = state => {
     name: state.name,
     currentQuestion: _.first(state.questions),
     questions: state.questions,
-    answered_questions: state.answered_questions
+    answered_questions: state.answered_questions,
+    keyPressed: state.keyPressed
   }
 }
 
@@ -158,7 +167,8 @@ const mapDispatchToProps = dispatch => {
     updateName: name => dispatch(updateName(name)),
     nextURL: nextURL,
     answerQuestion: (question, answer) => dispatch(answerQuestion(question, answer)),
-    resetQuiz: () => dispatch({ type: RESET_QUIZ })
+    resetQuiz: () => dispatch({ type: RESET_QUIZ }),
+    updateKeyPressed: (key) => dispatch({ type: KEY_PRESSED, key: key})
   }
 }
 
