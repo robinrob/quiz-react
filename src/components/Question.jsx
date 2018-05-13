@@ -36,7 +36,7 @@ export default class Question extends React.Component {
       <div key={answer.id} className="answer-row">
         {row(
           <div className="form-inline form-group">
-            <input type="radio" className="answer-radio" name="answer" value={answer.id} onChange={() => this.updateAnswer(answer)} checked={this.props.keyPressed == "" + (index+1)} ref="checkbox"/>
+            <input type="radio" className="answer-radio" name="answer" value={answer.id} onChange={() => this.updateAnswer(answer)} checked={this.props.pressedKey == "" + (index+1)} />
             <label>{answer.text}</label>
           </div>,
           answer.id
@@ -69,9 +69,9 @@ Question.propTypes = {
   quiz: PropTypes.object,  
   currentQuestion: PropTypes.object,
   questions: PropTypes.arrayOf(PropTypes.object),
-  pressedKey: PropTypes.string,
   nextURL: PropTypes.func,
-  answerQuestion: PropTypes.func
+  answerQuestion: PropTypes.func,
+  pressedKey: PropTypes.string
 }
 
 function row(html) {

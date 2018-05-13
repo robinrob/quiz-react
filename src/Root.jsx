@@ -13,7 +13,7 @@ export default class Root extends React.Component {
   render() {
     return (
       <Provider store={store}>
-      <ConnectedApp />
+        <ConnectedApp />
       </Provider>
     )
   }

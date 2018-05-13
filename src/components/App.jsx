@@ -3,7 +3,7 @@
 import React from "react"
 import { HashRouter as Router, Route } from "react-router-dom"
 
-import _ from "lodash"
+import PropTypes from "prop-types"
 
 import ConnectedMenu from "containers/ConnectedMenu"
 import ConnectedQuiz from "containers/ConnectedQuiz"
@@ -30,17 +30,21 @@ export default class App extends React.Component {
   render() {
     return (
       <Router>
-      <div id="app" tabIndex="0" className="app container" onKeyDown={(event) => this.onKeyUp(event.keyCode)}>
-      <div className="row">
-      <div className="offset-md-2 col-md-4">
-      <Route exact path="/menu" component={ConnectedMenu} />
-      <Route exact path="/quiz" component={ConnectedQuiz} />
-      <Route exact path="/questions/:id" component={ConnectedQuestion} />
-      <Route exact path="/results" component={ConnectedResults} />
-      </div>
-      </div>
-      </div>
+        <div id="app" tabIndex="0" className="app container" onKeyDown={(event) => this.onKeyUp(event.keyCode)}>
+          <div className="row">
+            <div className="offset-md-2 col-md-4">
+              <Route exact path="/menu" component={ConnectedMenu} />
+              <Route exact path="/quiz" component={ConnectedQuiz} />
+              <Route exact path="/questions/:id" component={ConnectedQuestion} />
+              <Route exact path="/results" component={ConnectedResults} />
+            </div>
+          </div>  
+        </div>
       </Router>
     )
   }
+}
+
+App.propTypes = {
+  updatePressedKey: PropTypes.func
 }

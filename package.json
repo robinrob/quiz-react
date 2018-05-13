@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint **/*.jsx",
+    "lint": "eslint ./**/*.jsx",
     "start": "webpack-dev-server --hot --history-api-fallback",
     "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
