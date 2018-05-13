@@ -20,19 +20,35 @@ export default class App extends React.Component {
     super(props)
   }
   
+  render() {
+    return (
+      <Provider store={store}>
+        <ConnectedApp />
+      </Provider>
+    )
+  }
+}
+
+class MiniApp extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+  
   getAnswers() {
     return this.state.answers
   }
 
-  onKeyUp() {
-
+  onKeyUp(keyCode) {
+    const key = keyCode-48
+    if (key >= 1 && key <= 4) {
+      this.props.updateKeyPressed(key)
+    }
   }
-  
+
   render() {
     return (
-      <Provider store={store}>
         <Router>
-          <div id="app" className="app container" onKeyUp={() => this.onKeyUp()}>
+          <div id="app" tabIndex="0" className="app container" onKeyDown={(event) => this.onKeyUp(event.keyCode)}>
             <div className="row">
               <div className="offset-md-2 col-md-4">
                 <Route exact path="/menu" component={ConnectedMenu} />
@@ -43,7 +59,6 @@ export default class App extends React.Component {
             </div>
           </div>
         </Router>
-      </Provider>
     )
   }
 }
@@ -172,6 +187,7 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
+export const ConnectedApp = connect(mapStateToProps, mapDispatchToProps)(MiniApp)
 export const ConnectedMenu = connect(mapStateToProps, mapDispatchToProps)(Menu)
 export const ConnectedQuizOption = connect(mapStateToProps, mapDispatchToProps)(QuizOption)
 export const ConnectedQuiz = connect(mapStateToProps, mapDispatchToProps)(Quiz)

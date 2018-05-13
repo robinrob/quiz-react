@@ -24,13 +24,19 @@ export default class Question extends React.Component {
     this.props.answerQuestion(this.props.currentQuestion, this.state.answer)
     this.setState(initialState)
   }
+
+  shouldBeChecked() {
+    return true
+  }
   
-  answerRow(answer) {
+  answerRow(answer, index) {
+    // console.log('this.refs.complete.checkbox.checked: ' + this.refs.complete.checkbox.checked)
+    
     return (
       <div key={answer.id} className="answer-row">
         {row(
           <div className="form-inline form-group">
-            <input type="radio" className="answer-radio" name="answer" value={answer.id} onChange={() => this.updateAnswer(answer)} />
+            <input type="radio" className="answer-radio" name="answer" value={answer.id} onChange={() => this.updateAnswer(answer)} checked={this.props.keyPressed == index+1} ref="checkbox"/>
             <label>{answer.text}</label>
           </div>,
           answer.id
@@ -44,7 +50,7 @@ export default class Question extends React.Component {
       <div className="question top-buffer" key={this.props.currentQuestion.id}>
         {row(<h2>{this.props.currentQuestion.title}</h2>)}
         <form>
-          {this.props.currentQuestion.multiple_choice_answers.map((answer) => this.answerRow(answer))}
+          {this.props.currentQuestion.multiple_choice_answers.map((answer, index) => this.answerRow(answer, index))}
         </form>
         {row(
           <ConnectedNextButton {...this.props}
