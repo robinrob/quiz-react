@@ -1,6 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import NextButton from "components/NextButton"
+import ConnectedAnswer from "containers/ConnectedAnswer"
 
 
 const initialState = {
@@ -30,18 +31,12 @@ export default class Question extends React.Component {
   }
   
   answerRow(answer, index) {
-    // console.log('this.refs.complete.checkbox.checked: ' + this.refs.complete.checkbox.checked)
-    
     return (
       <div key={answer.id} className="answer-row">
-        {row(
-          <div className="form-inline form-group">
-            <input type="radio" className="answer-radio" name="answer" value={answer.id} onChange={() => this.updateAnswer(answer)} checked={this.props.pressedKey == "" + (index+1)} />
-            <label>{answer.text}</label>
-          </div>,
-          answer.id
-        )}
-      </div>
+       {row(
+         <ConnectedAnswer index={index} answer={answer} updateAnswer={(answer) => this.updateAnswer(answer)} currentAnswer={this.state.answer}/>
+       )}
+       </div>
     )
   }
   
@@ -50,7 +45,7 @@ export default class Question extends React.Component {
       <div className="question top-buffer" key={this.props.currentQuestion.id}>
         {row(<h2>{this.props.currentQuestion.title}</h2>)}
         <form>
-          {this.props.currentQuestion.multiple_choice_answers.map((answer, index) => this.answerRow(answer, index))}
+          {this.props.currentQuestion.multiple_choice_answers.map((answer, index) => this.answerRow(answer, index+1))}
         </form>
         {row(
           <NextButton {...this.props}
@@ -71,7 +66,7 @@ Question.propTypes = {
   questions: PropTypes.arrayOf(PropTypes.object),
   nextURL: PropTypes.func,
   answerQuestion: PropTypes.func,
-  pressedKey: PropTypes.string
+  keyPressedObservable: PropTypes.object
 }
 
 function row(html) {

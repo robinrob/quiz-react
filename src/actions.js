@@ -28,10 +28,6 @@ export function resetQuiz() {
   return { type: RESET_QUIZ }
 }
 
-export function updatePressedKey(key) {
-  return { type: KEY_PRESSED, key }
-}
-
 export function nextURL(questions, currentQuestion) {
   let remainingQuestions = questions
   if (!_.isNil(currentQuestion)) {

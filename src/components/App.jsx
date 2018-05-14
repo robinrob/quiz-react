@@ -20,17 +20,10 @@ export default class App extends React.Component {
     return this.state.answers
   }
   
-  onKeyUp(keyCode) {
-    const key = keyCode-48
-    if (key >= 1 && key <= 4) {
-      this.props.updatePressedKey(key)
-    }
-  }
-  
   render() {
     return (
       <Router>
-        <div id="app" tabIndex="0" className="app container" onKeyDown={(event) => this.onKeyUp(event.keyCode)}>
+        <div id="app" tabIndex="0" className="app container">
           <div className="row">
             <div className="offset-md-2 col-md-4">
               <Route exact path="/menu" component={ConnectedMenu} />
@@ -43,8 +36,4 @@ export default class App extends React.Component {
       </Router>
     )
   }
-}
-
-App.propTypes = {
-  updatePressedKey: PropTypes.func
 }

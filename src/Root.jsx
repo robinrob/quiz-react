@@ -1,6 +1,7 @@
 import React from "react"
 import { Provider } from "react-redux"
 import { createStore } from "redux"
+import { Observable, fromEvent } from 'rxjs'
 
 import ConnectedApp from "./containers/ConnectedApp"
 import { rootReducer } from "./reducers"
@@ -24,7 +25,7 @@ const initialState = {
   questions: [],
   answered_questions: [],
   quiz: {id: null, name: null},
-  keyPressed: null
+  keyPressedObservable: fromEvent(document, 'keydown')
 }
 
 // let store = createStore(rootReducer)
