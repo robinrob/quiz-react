@@ -1,5 +1,7 @@
 import * as actions from "./actions"
 
+import _ from "lodash"
+
 export function rootReducer(state, action) {
   switch (action.type) {
     case actions.SET_QUIZ_ID:
@@ -11,7 +13,7 @@ export function rootReducer(state, action) {
     case actions.ANSWER_QUESTION:
       return {
         ...state,
-        questions: [...state.questions].slice(1),
+        questions: _.drop([...state.questions], 1),
         answered_questions: [...state.answered_questions, {...action.question, answer: action.answer}]
       }
     case actions.RESET_QUIZ:

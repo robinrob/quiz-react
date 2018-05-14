@@ -33,11 +33,12 @@ export function nextURL(questions, currentQuestion) {
   if (!_.isNil(currentQuestion)) {
     remainingQuestions = _.filter(questions, (q) => q.id != currentQuestion.id)
   }
-  let nextQuestion = _.first(remainingQuestions)
   
-  if (_.isObject(nextQuestion)) {
-    return "/questions/"+nextQuestion.id
+  var nextURL
+  if (remainingQuestions.length > 0) {
+    nextURL = "/questions/" + remainingQuestions[0].id
   } else {
-    return "/results"
+    nextURL = "/results"
   }
+  return nextURL
 }

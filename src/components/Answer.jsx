@@ -13,8 +13,7 @@ export default class Answer extends React.Component {
   }
 
   onKeyPressed(event) {
-    const key = event.keyCode - 48
-    if (key == this.props.index) {
+    if (event.key == this.props.index) {
       this.props.updateAnswer(this.props.answer)
     }
   }

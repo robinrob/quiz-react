@@ -25,9 +25,13 @@ export default class Menu extends React.Component {
     this.state = {
       quizzes: []
     }
+
+    this.nameInput = React.createRef()
   }
 
   async componentDidMount() {
+    this.nameInput.current.focus()
+
     try {
       let response = await axios.get("/api/quizzes")
 
@@ -65,6 +69,7 @@ export default class Menu extends React.Component {
               <label>What is your name?</label>
               <input type="text" className="form-control" placeholder="Enter Your Name"
                 defaultValue={this.props.name} onChange={(e) => this.props.updateName(e.target.value)}
+                ref={this.nameInput}
               />
             </div>
           )}

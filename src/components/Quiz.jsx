@@ -24,11 +24,12 @@ export default class Quiz extends React.Component {
       <div className="quiz top-buffer">
         {row(
           <h1>
-            Welcome to the {this.props.quiz.label} Quiz! 
+            Welcome to the {this.props.quiz.name} Quiz! 
           </h1>
         )}
         {row(
           <NextButton {...this.props}
+            shouldFocus={true}
             toURL={() => this.props.nextURL(this.props.questions)}
             isDisabled={() => !this.props.name }
           />

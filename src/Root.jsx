@@ -1,7 +1,7 @@
 import React from "react"
 import { Provider } from "react-redux"
 import { createStore } from "redux"
-import { Observable, fromEvent } from 'rxjs'
+import { fromEvent } from 'rxjs'
 
 import ConnectedApp from "./containers/ConnectedApp"
 import { rootReducer } from "./reducers"

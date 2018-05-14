@@ -12,9 +12,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
-  return {
-    updatePressedKey: key => dispatch(actions.updatePressedKey(key))
-  }
+  return { }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

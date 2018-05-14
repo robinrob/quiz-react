@@ -23,12 +23,12 @@ export default class App extends React.Component {
   render() {
     return (
       <Router>
-        <div id="app" tabIndex="0" className="app container">
+        <div id="app" className="app container">
           <div className="row">
-            <div className="offset-md-2 col-md-4">
+            <div className="offset-md-2 col-md-6">
               <Route exact path="/menu" component={ConnectedMenu} />
               <Route exact path="/quiz" component={ConnectedQuiz} />
-              <Route exact path="/questions/:id" component={ConnectedQuestion} />
+              <Route path="/questions/:id" component={ConnectedQuestion} />
               <Route exact path="/results" component={ConnectedResults} />
             </div>
           </div>  

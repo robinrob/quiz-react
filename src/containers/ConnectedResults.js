@@ -5,7 +5,8 @@ import Results from "components/Results"
 const mapStateToProps = state => {
   return {
     name: state.name,
-    answered_questions: state.answered_questions
+    answered_questions: state.answered_questions,
+    quiz: state.quiz
   }
 }
 

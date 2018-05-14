@@ -7,14 +7,16 @@ import Menu from "components/Menu"
 const mapStateToProps = state => {
   return {
     quiz: state.quiz,
-    name: state.name
+    name: state.name,
+    questions: state.questions
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     setQuiz: quiz => dispatch(actions.setQuiz(quiz)),
-    updateName: name => dispatch(actions.updateName(name))
+    updateName: name => dispatch(actions.updateName(name)),
+    nextURL: questions => actions.nextURL(questions)
   }
 }
 
