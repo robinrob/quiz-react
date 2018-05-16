@@ -1,15 +1,11 @@
-import React from "react"
-
-import PropTypes from "prop-types"
-
+import * as React from "react"
 import { Link } from "react-router-dom"
+import * as axios from "axios"
+import * as _ from "lodash"
 
-import axios from "axios"
+import { ResultsProps, ResultsState } from "interfaces"
 
-import _ from "lodash"
-
-
-export default class Result extends React.Component {
+export default class Result extends React.Component<ResultsProps, ResultsState> {
   constructor(props) {
     super(props)
 
@@ -38,17 +34,11 @@ export default class Result extends React.Component {
       
         <p className="result">You scored {this.state.score} points out of a possible {this.props.answered_questions.length} in our {this.props.quiz.name} quiz.</p>
       
-        <Link to="/quiz" onClick={this.props.resetQuiz} className="nextBtn btn btn-md btn-primary">
+        <Link to="/quiz" onClick={() => this.props.resetQuiz()} className="nextBtn btn btn-md btn-primary">
         Try Again
         </Link>
       </div>
       
     )
   }
-}
-
-Result.propTypes = {
-  name: PropTypes.string,
-  resetQuiz: PropTypes.func,
-  answered_questions: PropTypes.arrayOf(PropTypes.object)
 }

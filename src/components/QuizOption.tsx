@@ -1,8 +1,8 @@
-import React from "react"
+import * as React from "react"
 
-import PropTypes from "prop-types"
+import { QuizOptionProps } from "interfaces"
 
-export default class QuizOption extends React.Component {
+export default class QuizOption extends React.Component<QuizOptionProps> {
   constructor(props) {
     super(props)
     
@@ -26,10 +26,4 @@ export default class QuizOption extends React.Component {
       </div>
     )
   }
-}
-
-QuizOption.propTypes = {
-  setQuiz: PropTypes.func,
-  quiz: PropTypes.object,
-  quizOption: PropTypes.object
 }

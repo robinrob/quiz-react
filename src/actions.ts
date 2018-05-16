@@ -1,4 +1,4 @@
-import _ from "lodash"
+import * as _ from "lodash"
 
 export const LOAD_QUESTIONS = "LOAD_QUESTIONS"
 export const ON_NEXT = "ON_NEXT"
@@ -28,7 +28,7 @@ export function resetQuiz() {
   return { type: RESET_QUIZ }
 }
 
-export function nextURL(questions, currentQuestion) {
+export function nextURL(questions, currentQuestion=null) {
   let remainingQuestions = questions
   if (!_.isNil(currentQuestion)) {
     remainingQuestions = _.filter(questions, (q) => q.id != currentQuestion.id)

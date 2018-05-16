@@ -1,10 +1,10 @@
 import { connect } from "react-redux"
 
-import _ from "lodash"
+import * as _ from "lodash"
 
 import * as actions from "actions"
 
-import Answer from "../components/Answer"
+import Answer from "components/Answer"
 
 const mapStateToProps = state => {
   return {

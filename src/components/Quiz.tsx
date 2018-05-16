@@ -1,14 +1,16 @@
-import React from "react"
-
-import PropTypes from "prop-types"
-
+import * as React from "react"
+import * as axios from 'axios'
 import "react-bootstrap"
 
-import axios from "axios"
-
 import NextButton from "components/NextButton"
+import { QuizProps } from "interfaces"
 
-export default class Quiz extends React.Component {
+
+export default class Quiz extends React.Component<QuizProps> {
+  constructor(props) {
+    super(props)
+  }
+
   async componentDidMount() {
     try {
       let response = await axios.get("/api/quizzes/" + this.props.quiz.id)
@@ -28,23 +30,16 @@ export default class Quiz extends React.Component {
           </h1>
         )}
         {row(
-          <NextButton {...this.props}
-            shouldFocus={true}
-            toURL={() => this.props.nextURL(this.props.questions)}
-            isDisabled={() => !this.props.name }
+          <NextButton {...this.props, {
+            shouldFocus: true,
+            toURL:() => this.props.nextURL(this.props.questions),
+            isDisabled: () => !this.props.name
+          }}
           />
         )}
       </div>
     )
   }
-}
-
-Quiz.propTypes = {
-  name: PropTypes.string,
-  quiz: PropTypes.object,  
-  nextURL: PropTypes.func,
-  questions: PropTypes.array,
-  loadQuestions: PropTypes.func
 }
 
 function row(html) {

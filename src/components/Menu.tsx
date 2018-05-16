@@ -1,12 +1,11 @@
-import React from "react"
-
-import PropTypes from "prop-types"
-import axios from "axios"
-
+import * as React from "react"
+import * as axios from "axios"
 import "react-bootstrap"
 
 import NextButton from "components/NextButton"
 import ConnectedQuizOption from "containers/ConnectedQuizOption"
+import { MenuProps, MenuState, QuizObject } from "interfaces"
+
 
 function row(html) {
   return (
@@ -18,19 +17,18 @@ function row(html) {
   )
 }
 
-export default class Menu extends React.Component {
+export default class Menu extends React.Component<MenuProps, MenuState> {
   constructor(props) {
     super(props)
     
     this.state = {
-      quizzes: []
+      quizzes: [],
+      nameInputRef: React.createRef()
     }
-
-    this.nameInput = React.createRef()
   }
 
   async componentDidMount() {
-    this.nameInput.current.focus()
+    this.state.nameInputRef.current.focus()
 
     try {
       let response = await axios.get("/api/quizzes")
@@ -46,7 +44,7 @@ export default class Menu extends React.Component {
   quizOption(quiz) {
     return (
       <div className="quizOption">
-        <ConnectedQuizOption quizOption={quiz} />
+        <ConnectedQuizOption {...{quizOption: quiz}} />
       </div>
     )
   }
@@ -69,7 +67,7 @@ export default class Menu extends React.Component {
               <label>What is your name?</label>
               <input type="text" className="form-control" placeholder="Enter Your Name"
                 defaultValue={this.props.name} onChange={(e) => this.props.updateName(e.target.value)}
-                ref={this.nameInput}
+                ref={this.state.nameInputRef}
               />
             </div>
           )}
@@ -83,27 +81,20 @@ export default class Menu extends React.Component {
           {row(
             <div className="form-group">
               <label></label>
-              {this.state.quizzes.map((quiz) => <React.Fragment key={quiz.id}>{this.quizOption(quiz)}</React.Fragment>)}
+              {this.state.quizzes.map((quiz: QuizObject) => <React.Fragment key={quiz.id}>{this.quizOption(quiz)}</React.Fragment>)}
             </div>
           )}
         </form>
         <form>
           
           {row(
-            <NextButton {...this.props}
-              toURL={() => "/quiz/"}
-              isDisabled={() => this.isDisabled() }
-            />
+            <NextButton {...this.props, {
+              toURL: () => "/quiz/",
+              isDisabled: () => this.isDisabled()
+            }}/>
           )}
         </form>
       </div>
     )
   }
-}
-
-Menu.propTypes = {
-  updateName: PropTypes.func,
-  setQuiz: PropTypes.func,
-  name: PropTypes.string,
-  quiz: PropTypes.object
 }

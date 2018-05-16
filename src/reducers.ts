@@ -1,6 +1,8 @@
-import * as actions from "./actions"
+import * as _ from "lodash"
 
-import _ from "lodash"
+import * as actions from "./actions"
+import { initialState } from "./store"
+
 
 export function rootReducer(state, action) {
   switch (action.type) {

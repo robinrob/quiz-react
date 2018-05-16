@@ -1,9 +1,7 @@
 /*jshint esversion: 6 */
 
-import React from "react"
+import * as React from "react"
 import { HashRouter as Router, Route } from "react-router-dom"
-
-import PropTypes from "prop-types"
 
 import ConnectedMenu from "containers/ConnectedMenu"
 import ConnectedQuiz from "containers/ConnectedQuiz"
@@ -14,10 +12,6 @@ import ConnectedResults from "containers/ConnectedResults"
 export default class App extends React.Component {
   constructor(props) {
     super(props)
-  }
-  
-  getAnswers() {
-    return this.state.answers
   }
   
   render() {

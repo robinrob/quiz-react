@@ -7,7 +7,7 @@ module.exports = {
   entry: [
     '@babel/polyfill',
     'react-hot-loader/patch',
-    './src/index'
+    './src/index.tsx'
   ],
   // entry: {
   //   main: [
@@ -43,7 +43,7 @@ module.exports = {
   },
   resolve: {
     modules: ["node_modules", "src"],
-    extensions: [".js", ".jsx", ".css"],
+    extensions: ['.tsx', '.ts', '.js'],
     alias: {
       react: path.resolve("./node_modules/react")
     },
@@ -94,16 +94,21 @@ module.exports = {
           }
         ]
       },
+      // {
+      //   test: /\.tsx$/,
+      //   include: path.resolve(__dirname, "src"),
+      //   loader: "babel-loader",
+      //   // Ignore any .babelrc file to avoid confusion
+      //   options: {
+      //     babelrc: false,
+      //     presets: ["@babel/preset-react", "@babel/preset-env"]
+      //   }
+      // },
       {
-        test: /\.jsx$/,
+        test: /\.tsx?$/,
         include: path.resolve(__dirname, "src"),
-        loader: "babel-loader",
-        // Ignore any .babelrc file to avoid confusion
-        options: {
-          babelrc: false,
-          presets: ["@babel/preset-react", "@babel/preset-env"]
-        }
-      },
+        loader: 'ts-loader'
+      }
     ]
   },
   plugins: [

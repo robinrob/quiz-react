@@ -1,0 +1,5 @@
+{
+  "globalDependencies": {
+    "axios": "github:mzabriskie/axios/axios.d.ts#8332392"
+  }
+}

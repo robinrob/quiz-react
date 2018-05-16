@@ -1,14 +1,12 @@
 import { withRouter } from 'react-router'
-
-import _ from "lodash"
-
-import React from "react"
-import PropTypes from "prop-types"
+import * as _ from "lodash"
+import * as React from "react"
 import NextButton from "components/NextButton"
 import ConnectedAnswer from "containers/ConnectedAnswer"
+import { QuestionProps, QuestionState } from "interfaces"
 
 
-class Question extends React.Component {
+class Question extends React.Component<QuestionProps, QuestionState> {
   constructor(props) {
     super(props)
     
@@ -52,7 +50,12 @@ class Question extends React.Component {
     return (
       <div key={answer.id} className="answer-row">
       {row(
-        <ConnectedAnswer index={index} answer={answer} updateAnswer={(answer) => this.updateAnswer(answer)} currentAnswer={this.state.answer}/>
+        <ConnectedAnswer {...{
+          index: index,
+          answer: answer,
+          updateAnswer: (answer) => this.updateAnswer(answer),
+          currentAnswer:this.state.answer
+        }}/>
       )}
       </div>
     )
@@ -71,10 +74,11 @@ class Question extends React.Component {
         {this.props.currentQuestion.multiple_choice_answers.map((answer, index) => this.answerRow(answer, index+1))}
         </form>
         {row(
-          <NextButton {...this.props}
-          shouldFocus={true}
-          isDisabled={() => this.isFormDisabled() }
-          onClick={() => this.answerCurrentQuestionAndgoToNext()}
+          <NextButton {...this.props, {
+            shouldFocus: true,
+            isDisabled: () => this.isFormDisabled(),
+            onClick: () => this.answerCurrentQuestionAndgoToNext()
+          }}
           />
         )}
         </div>
@@ -85,16 +89,6 @@ class Question extends React.Component {
   }
 }
 export default withRouter(Question)
-
-Question.propTypes = {
-  name: PropTypes.string,
-  quiz: PropTypes.object,  
-  currentQuestion: PropTypes.object,
-  questions: PropTypes.arrayOf(PropTypes.object),
-  nextURL: PropTypes.func,
-  answerQuestion: PropTypes.func,
-  keyPressedObservable: PropTypes.object
-}
 
 function row(html) {
   return (

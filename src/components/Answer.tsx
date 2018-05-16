@@ -1,6 +1,8 @@
-import React from "react"
+import * as React from "react"
 
-export default class Answer extends React.Component {
+import * as interfaces from "interfaces"
+
+export default class Answer extends React.Component<interfaces.AnswerProps> {
   constructor(props) {
     super(props)
     
