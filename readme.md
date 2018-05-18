@@ -5,6 +5,5 @@
 2. The [quiz-rails](https://github.com/robinrob/quiz-rails) server-side app needs to be running.
 
 ## Setup
-Steps are:
 1. `yarn`
 2. `yarn start`
