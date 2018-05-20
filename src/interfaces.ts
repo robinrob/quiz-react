@@ -107,5 +107,5 @@ export interface ResultsProps {
 }
 
 export interface ResultsState {
-  score: Number
+  points: Number
 }
