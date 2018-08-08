@@ -15,7 +15,7 @@ export default class Quiz extends React.Component<QuizProps> {
     try {
       let response = await axios.get("/api/quizzes/" + this.props.quiz.id)
       
-      this.props.loadQuestions(response.data.questions.slice(0, 2))
+      this.props.loadQuestions(response.data.questions.slice(0, 5))
     } catch(error) {
       alert("questions failed to load")
     }

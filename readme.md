@@ -7,3 +7,4 @@
 ## Setup
 1. `yarn`
 2. `yarn start`
+3. Open the URL: http://localhost:8080/#/menu
